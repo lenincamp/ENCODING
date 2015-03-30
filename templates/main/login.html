@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Encoding Ideas - Login</title>
+	<style type="text/css">
+		@import url("{{STATIC_URL}}css/metro-ui/metro-bootstrap.min.css");
+		@import url("{{STATIC_URL}}css/metro-ui/metro-bootstrap-responsive.min.css");
+    @import url("{{STATIC_URL}}css/metro-ui/iconFont.min.css");
+  </style>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery.widget.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/metro.min.js"></script>
+	
+</head>
+<body class="metro">
+	<div class="grid container">
+		<!--class='grid fluid' para que vaya acoplado en el mismo sitio-->
+		
+		  <div class="row">
+			  <div class="span6 offset4">
+			    
+			    <div class="panel">
+			      <div class="panel-header bg-lightBlue fg-white">
+			       	<b>Acceso al Sistema</b>
+			      </div>
+
+			      <div class="panel-content" style="padding:20px;">
+			        <!--FORMULARIO LOGIN-->
+			        <form action="/main/login/" method="post">					         
+					        <label>Usuario: </label>
+					        <div class="input-control text" data-role="input-control">
+					            <input type="text" placeholder="type text" name="user">
+					            <button class="btn-clear" tabindex="-1" type="button"></button>
+					        </div>
+					        <label>Password: </label>
+					        <div class="input-control password" data-role="input-control">
+					            <input type="password" placeholder="type password" autofocus="" name="password">
+					            <button class="btn-reveal" tabindex="-1" type="button"></button>
+					        </div>
+					        <button type="submit" class="info"><i class="icon-rocket on-left"></i><b>Acceder</b></button> 
+					            
+					    </form>
+					    <!--END FORM-->
+			      </div>
+			    </div>
+			  </div>
+
+			</div>
+		
+
+	</div>
+		
+		
+
+</body>
+</html>
