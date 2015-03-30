@@ -1,0 +1,194 @@
+<html>
+<head>
+	<title>{% block title %} {% endblock title %}</title>
+	<style type="text/css">
+		@import url("{{STATIC_URL}}css/metro-ui/metro-bootstrap.min.css");
+		@import url("{{STATIC_URL}}css/metro-ui/metro-bootstrap-responsive.min.css");
+    @import url("{{STATIC_URL}}css/metro-ui/iconFont.min.css");
+    body{
+      min-height: 200px;
+    }
+    {% block style %}
+    	
+    {% endblock style %}
+	</style>
+
+	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery.widget.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/metro.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/forms/ajax.js"></script>
+</head>
+
+<body class="metro">
+
+  <!--HEADER MAIN NAVBAR-->
+  <header>
+    <div class="navbar shadow">
+      <div class="navbar-content container">
+					
+          <a href="/main/" class="element">
+          	<span class="icon-grid-view "></span> ENCODING <sup>Ideas</sup></a>
+          	
+          <span class="element-divider"></span>
+
+          <a class="pull-menu" href="#"></a>
+          <ul class="element-menu">
+              <li>
+                  <a class="dropdown-toggle" href="#">
+                  	<i class="icon-rocket fg-darker"
+											style="background-color: #fff;
+									           color: white;
+									           padding: 10px;
+									           border-radius: 50%">
+                  	</i> Eventos 
+                  </a>
+                  <ul class="dropdown-menu" data-role="dropdown">
+                      <li>
+                      	<a href="#"><i class=" icon-pencil"></i> <b> Crear Evento</b></a>
+                      </li>
+                      <!--li>
+                          <a href="#" class="dropdown-toggle">General CSS</a>
+                          <ul class="dropdown-menu" data-role="dropdown">
+                              <li><a href="global.html">Global styles</a></li>
+                              <li><a href="grid.html">Grid system</a></li>
+                              <div class="divider"></div>
+                              <li><a href="typography.html">Typography</a></li>
+                              <li><a href="tables.html">Tables</a></li>
+                              <li><a href="forms.html">Forms</a></li>
+                              <li><a href="buttons.html">Buttons</a></li>
+                              <li><a href="images.html">Images</a></li>
+                          </ul>
+                      </li-->
+                      <li class="divider"></li>
+                      <li>
+                      	<a href="#"><i class="icon-search"></i> <b> Buscar Evento</b></a>
+                      </li>
+                      <!--li class="disabled"><a href="layouts.html">Layouts and templates</a></li>
+                      <li class="divider"></li>
+                      <li><a href="icons.html">Icons</a></li-->
+                  </ul>
+              </li>
+              <li>
+                  <a class="dropdown-toggle" href="#">
+                  	<i class="icon-mail fg-darker"
+											style="background-color: #fff;
+									           color: white;
+									           padding: 10px;
+									           border-radius: 50%"
+                  	></i> Mensajes
+                  </a>
+                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
+                      <li> <a href="http://blog.metroui.net">Nuevo Mensaje</a></li>
+                      <li> <a href="http://forum.metroui.net">Mensajes Enviados</a></li>
+                      <li class="divider"></li>
+                      <li><a href="https://github.com/olton/Metro-UI-CSS">Eliminar Mensaje</a></li>
+                      <li class="divider"></li>
+                      
+                  </ul>
+              </li>
+
+              <li>
+                  <a class="dropdown-toggle" href="#">
+                  	<i class="icon-cart fg-darker"
+											style="background-color: #fff;
+									           color: white;
+									           padding: 10px;
+									           border-radius: 50%"
+                  	>                  		
+                  	</i> Productos
+                  </a>
+                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
+                      <li class="disabled"><a href="http://blog.metroui.net">Blog</a></li>
+                      <li class="disabled"><a href="http://forum.metroui.net">Community Forum</a></li>
+                      <li class="divider"></li>
+                      <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
+                      <li class="divider"></li>
+                      <li><a href="https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE">License</a></li>
+                  </ul>
+              </li>
+
+              <li>
+                  <a class="dropdown-toggle" href="#">
+                  	<i class="icon-basket fg-darker"
+											style="background-color: #fff;
+									           color: white;
+									           padding: 10px;
+									           border-radius: 50%"
+                  	>                  		
+                  	</i> Ofertas
+                  </a>
+                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
+                      <li class="disabled"><a href="http://blog.metroui.net">Blog</a></li>
+                      <li class="disabled"><a href="http://forum.metroui.net">Community Forum</a></li>
+                      <li class="divider"></li>
+                      <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
+                      <li class="divider"></li>
+                      <li><a href="https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE">License</a></li>
+                  </ul>
+              </li>
+
+              <li>
+                  <a class="dropdown-toggle" href="#">
+                  	<i class="icon-dollar-2 fg-darker"
+											style="background-color: #fff;
+									           color: white;
+									           padding: 10px;
+									           border-radius: 50%"
+                  	>                  		
+                  	</i> Facturación
+                  </a>
+                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
+                      <li class="disabled"><a href="http://blog.metroui.net">Blog</a></li>
+                      <li class="disabled"><a href="http://forum.metroui.net">Community Forum</a></li>
+                      <li class="divider"></li>
+                      <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
+                      <li class="divider"></li>
+                      <li><a href="https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE">License</a></li>
+                  </ul>
+              </li>
+          </ul>
+
+          <div class="no-tablet-portrait">
+              <span class="element-divider"></span>
+              <!--a class="element brand" href="#"><span class="icon-spin"></span></a>
+              <a class="element brand" href="#"><span class="icon-printer"></span></a>
+              <span class="element-divider"></span>
+
+              <div class="element input-element">
+                  <form>
+                      <div class="input-control text">
+                          <input type="text" placeholder="Search...">
+                          <button class="btn-search"></button>
+                      </div>
+                  </form>
+              </div-->
+
+              <div class="element place-right">
+                  <a class="dropdown-toggle" href="#"><span class="icon-cog"></span></a>
+                  <ul class="dropdown-menu place-right" data-role="dropdown">
+                      <li><a href="#">Products</a></li>
+                      <li><a href="#">Download</a></li>
+                      <li><a href="#">Support</a></li>
+                      <li><a href="#">Buy Now</a></li>
+                  </ul>
+              </div>
+              <span class="element-divider place-right"></span>
+              <button class="element image-button image-left place-right">
+                  Sergey Pimenov
+                  <img src="images/me.jpg">
+              </button>
+          </div>
+      </div>
+  	</div>
+  </header>
+  <!--END NAVBAR-->
+
+	{% block content %}
+		
+	{% endblock content %}
+
+	{% block script %}
+		
+	{% endblock script %}
+</body>
+</html>
