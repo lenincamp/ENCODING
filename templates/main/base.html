@@ -36,49 +36,35 @@
               <li>
                   <a class="dropdown-toggle" href="#">
                   	<i class="icon-rocket fg-darker"
-											style="background-color: #fff;
-									           color: white;
-									           padding: 10px;
-									           border-radius: 50%">
+											 style="background-color: #fff;
+									            color: white;
+									            padding: 10px;
+									            border-radius: 50%">
                   	</i> Eventos 
                   </a>
                   <ul class="dropdown-menu" data-role="dropdown">
                       <li>
                       	<a href="#"><i class=" icon-pencil"></i> <b> Crear Evento</b></a>
                       </li>
-                      <!--li>
-                          <a href="#" class="dropdown-toggle">General CSS</a>
-                          <ul class="dropdown-menu" data-role="dropdown">
-                              <li><a href="global.html">Global styles</a></li>
-                              <li><a href="grid.html">Grid system</a></li>
-                              <div class="divider"></div>
-                              <li><a href="typography.html">Typography</a></li>
-                              <li><a href="tables.html">Tables</a></li>
-                              <li><a href="forms.html">Forms</a></li>
-                              <li><a href="buttons.html">Buttons</a></li>
-                              <li><a href="images.html">Images</a></li>
-                          </ul>
-                      </li-->
+        
                       <li class="divider"></li>
                       <li>
                       	<a href="#"><i class="icon-search"></i> <b> Buscar Evento</b></a>
                       </li>
-                      <!--li class="disabled"><a href="layouts.html">Layouts and templates</a></li>
-                      <li class="divider"></li>
-                      <li><a href="icons.html">Icons</a></li-->
                   </ul>
               </li>
               <li>
                   <a class="dropdown-toggle" href="#">
                   	<i class="icon-mail fg-darker"
-											style="background-color: #fff;
+											 style="background-color: #fff;
 									           color: white;
 									           padding: 10px;
 									           border-radius: 50%"
-                  	></i> Mensajes
+                  	>
+                    </i> Mensajes
                   </a>
                   <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
-                      <li> <a href="http://blog.metroui.net">Nuevo Mensaje</a></li>
+                      <li> <a href="http://blog.metroui.net"><i class="icon-search"></i> <b>Nuevo Mensaje</b></a></li>
                       <li> <a href="http://forum.metroui.net">Mensajes Enviados</a></li>
                       <li class="divider"></li>
                       <li><a href="https://github.com/olton/Metro-UI-CSS">Eliminar Mensaje</a></li>
@@ -90,15 +76,15 @@
               <li>
                   <a class="dropdown-toggle" href="#">
                   	<i class="icon-cart fg-darker"
-											style="background-color: #fff;
-									           color: white;
-									           padding: 10px;
-									           border-radius: 50%"
+											 style="background-color: #fff;
+									            color: white;
+									            padding: 10px;
+									            border-radius: 50%"
                   	>                  		
                   	</i> Productos
                   </a>
                   <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
-                      <li class="disabled"><a href="http://blog.metroui.net">Blog</a></li>
+                      <li class="disabled"><a href="http://blog.metroui.net"></a></li>
                       <li class="disabled"><a href="http://forum.metroui.net">Community Forum</a></li>
                       <li class="divider"></li>
                       <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
@@ -150,32 +136,18 @@
 
           <div class="no-tablet-portrait">
               <span class="element-divider"></span>
-              <!--a class="element brand" href="#"><span class="icon-spin"></span></a>
-              <a class="element brand" href="#"><span class="icon-printer"></span></a>
-              <span class="element-divider"></span>
-
-              <div class="element input-element">
-                  <form>
-                      <div class="input-control text">
-                          <input type="text" placeholder="Search...">
-                          <button class="btn-search"></button>
-                      </div>
-                  </form>
-              </div-->
 
               <div class="element place-right">
                   <a class="dropdown-toggle" href="#"><span class="icon-cog"></span></a>
                   <ul class="dropdown-menu place-right" data-role="dropdown">
-                      <li><a href="#">Products</a></li>
-                      <li><a href="#">Download</a></li>
-                      <li><a href="#">Support</a></li>
-                      <li><a href="#">Buy Now</a></li>
+                      <li><a href="#">Modificar Contraseña</a></li>
+                      <li><a href="/main/logout/">Salir</a></li>
                   </ul>
               </div>
               <span class="element-divider place-right"></span>
-              <button class="element image-button image-left place-right">
-                  Sergey Pimenov
-                  <img src="images/me.jpg">
+              <button class="element image-button image-left place-right large">
+                  {{user_name}}
+                  <img src="{{STATIC_URL}}img/pm-avatar.png" style="height:100%;">
               </button>
           </div>
       </div>
