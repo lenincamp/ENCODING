@@ -140,16 +140,14 @@
               <div class="element place-right">
                   <a class="dropdown-toggle" href="#"><span class="icon-cog"></span></a>
                   <ul class="dropdown-menu place-right" data-role="dropdown">
-                      <li><a href="#">Products</a></li>
-                      <li><a href="#">Download</a></li>
-                      <li><a href="#">Support</a></li>
-                      <li><a href="#">Buy Now</a></li>
+                      <li><a href="#">Modificar Contraseña</a></li>
+                      <li><a href="/main/logout/">Salir</a></li>
                   </ul>
               </div>
               <span class="element-divider place-right"></span>
-              <button class="element image-button image-left place-right">
-                  Sergey Pimenov
-                  <img src="images/me.jpg">
+              <button class="element image-button image-left place-right large">
+                  {{user_name}}
+                  <img src="{{STATIC_URL}}img/pm-avatar.png" style="height:100%;">
               </button>
           </div>
       </div>
