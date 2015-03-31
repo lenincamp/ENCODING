@@ -17,7 +17,7 @@ class Login(View):
 				menus    = Menu.objects.filter(men_cod__in = submenus.values('men_cod')).order_by('men_des')
 				sub_sub  = SubMenu.objects.filter(sbm_sbm__isnull=False).exclude(sbm_sbm=None)
 				
-				return render(request,self.template,{"user_name":user_name,"menus":menus,"submenus":submenus, "subs":sub_sub})
+				return render(request,self.template,{"user_name":user_name,"menus":menus,"submenus":submenus.order_by('-sbm_des'), "subs":sub_sub})
 
 			else:
 				return HttpResponseRedirect("/main/")
