@@ -177,3 +177,23 @@ class Usuario(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario'
+
+class Menu(models.Model):
+    men_cod = models.AutoField(primary_key=True)
+    men_des = models.CharField(max_length=50)
+    men_ico = models.CharField(max_length=25, null=True)
+    class Meta:
+        db_table = 'menu'
+
+class SubMenu(models.Model):
+    sbm_cod = models.AutoField(primary_key=True)
+    sbm_des = models.CharField(max_length=50, null=True)
+    sbm_ico = models.CharField(max_length=25, null=True)
+    sbm_url = models.CharField(max_length=150)
+    #codigo de submenu (menu)
+    sbm_sbm = models.IntegerField(default=0)
+    sbm_men = models.NullBooleanField()
+    men_cod = models.ForeignKey(Menu, db_column='men_cod', blank=True,null=True)
+    tip_cod = models.ForeignKey(TipoUsuario, db_column='tip_cod')
+    class Meta:
+        db_table = 'submenu'

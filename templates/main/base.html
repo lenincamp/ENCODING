@@ -21,126 +21,66 @@
 
 <body class="metro">
 
-  <!--HEADER MAIN NAVBAR-->
+    <!--HEADER MAIN NAVBAR-->
   <header>
     <div class="navbar shadow">
-      <div class="navbar-content container">
-					
-          <a href="/main/logged_user/" class="element">
-          	<span class="icon-grid-view "></span> ENCODING <sup>Ideas</sup></a>
-          	
-          <span class="element-divider"></span>
+      <div class="navbar-content container">        
+        <a href="/main/logged_user/" class="element">
+          <span class="icon-grid-view "></span> ENCODING <sup>Ideas</sup>
+        </a>
+        <span class="element-divider"></span>
+        <a class="pull-menu" href="#"></a>
 
-          <a class="pull-menu" href="#"></a>
-          <ul class="element-menu">
-              <li>
-                  <a class="dropdown-toggle" href="#">
-                  	<i class="icon-rocket fg-darker"
-											 style="background-color: #fff;
-									            color: white;
-									            padding: 10px;
-									            border-radius: 50%">
-                  	</i> Eventos 
-                  </a>
-                  <ul class="dropdown-menu" data-role="dropdown">
+        {% for menu in menus %}
+          <ul class="element-menu">           
+            <li>
+              <a class="dropdown-toggle" href="#">
+                <i class="{{menu.men_ico}} fg-darker" style="background-color:#fff;color:white;padding:10px;border-radius:50%">
+                </i> {{menu.men_des}} 
+              </a>
+              <ul class="dropdown-menu" data-role="dropdown">
+                {% for submenu in submenus %}                 
+                  {% if menu.men_cod == submenu.men_cod_id and submenu.sbm_des != None %}                   
+                    {% if submenu.sbm_men %}
                       <li>
-                      	<a href="#"><i class=" icon-pencil"></i> <b> Crear Evento</b></a>
+                        <a href="#" class="dropdown-toggle">{{submenu.sbm_des}}</a>                         
+                        
+                        <ul class="dropdown-menu" data-role="dropdown" style="display: block;">
+                          {% for sb in subs %}                      
+                            {% ifequal sb.sbm_sbm submenu.sbm_cod  %} 
+                              <li><a href="#">{{sb.sbm_des}}</a></li>
+                              {% if not forloop.last %}
+                                <li class="divider"></li> 
+                              {% endif %}
+                            {% endifequal %}
+                            
+                          {% endfor %}
+                        </ul>
                       </li>
-        
-                      <li class="divider"></li>
-                      <li>
-                      	<a href="#"><i class="icon-search"></i> <b> Buscar Evento</b></a>
-                      </li>
-                  </ul>
-              </li>
-              <li>
-                  <a class="dropdown-toggle" href="#">
-                  	<i class="icon-mail fg-darker"
-											 style="background-color: #fff;
-									           color: white;
-									           padding: 10px;
-									           border-radius: 50%"
-                  	>
-                    </i> Mensajes
-                  </a>
-                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
-                      <li> <a href="http://blog.metroui.net"><i class="icon-search"></i> <b>Nuevo Mensaje</b></a></li>
-                      <li> <a href="http://forum.metroui.net">Mensajes Enviados</a></li>
-                      <li class="divider"></li>
-                      <li><a href="https://github.com/olton/Metro-UI-CSS">Eliminar Mensaje</a></li>
-                      <li class="divider"></li>
+                    {% else %}                      
+                      <li style="margin-bottom:1px solid #ccc;">
+                        <a href="#"><i class=" icon-pencil"></i> <b> {{submenu.sbm_des}} </b></a>
+                      </li>                 
+                      <!--{% if not forloop.last %}
+                        <li class="divider"></li>
+                      {% endif %}-->
                       
-                  </ul>
-              </li>
-
-              <li>
-                  <a class="dropdown-toggle" href="#">
-                  	<i class="icon-cart fg-darker"
-											 style="background-color: #fff;
-									            color: white;
-									            padding: 10px;
-									            border-radius: 50%"
-                  	>                  		
-                  	</i> Productos
-                  </a>
-                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
-                      <li class="disabled"><a href="http://blog.metroui.net"></a></li>
-                      <li class="disabled"><a href="http://forum.metroui.net">Community Forum</a></li>
-                      <li class="divider"></li>
-                      <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
-                      <li class="divider"></li>
-                      <li><a href="https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE">License</a></li>
-                  </ul>
-              </li>
-
-              <li>
-                  <a class="dropdown-toggle" href="#">
-                  	<i class="icon-basket fg-darker"
-											style="background-color: #fff;
-									           color: white;
-									           padding: 10px;
-									           border-radius: 50%"
-                  	>                  		
-                  	</i> Ofertas
-                  </a>
-                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
-                      <li class="disabled"><a href="http://blog.metroui.net">Blog</a></li>
-                      <li class="disabled"><a href="http://forum.metroui.net">Community Forum</a></li>
-                      <li class="divider"></li>
-                      <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
-                      <li class="divider"></li>
-                      <li><a href="https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE">License</a></li>
-                  </ul>
-              </li>
-
-              <li>
-                  <a class="dropdown-toggle" href="#">
-                  	<i class="icon-dollar-2 fg-darker"
-											style="background-color: #fff;
-									           color: white;
-									           padding: 10px;
-									           border-radius: 50%"
-                  	>                  		
-                  	</i> Facturación
-                  </a>
-                  <ul class="dropdown-menu" data-role="dropdown" style="display: none;">
-                      <li class="disabled"><a href="http://blog.metroui.net">Blog</a></li>
-                      <li class="disabled"><a href="http://forum.metroui.net">Community Forum</a></li>
-                      <li class="divider"></li>
-                      <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
-                      <li class="divider"></li>
-                      <li><a href="https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE">License</a></li>
-                  </ul>
-              </li>
+                    {% endif %}
+                  {% endif %}           
+                {% endfor %}
+              </ul>   
+            </li>
           </ul>
-
-          <div class="no-tablet-portrait">
+        {% endfor %}
+        
+        <div class="no-tablet-portrait">
               <span class="element-divider"></span>
 
               <div class="element place-right">
                   <a class="dropdown-toggle" href="#"><span class="icon-cog"></span></a>
                   <ul class="dropdown-menu place-right" data-role="dropdown">
                       <li><a href="#">Modificar Contraseña</a></li>
+                     
                       <li><a href="/main/logout/">Salir</a></li>
                   </ul>
               </div>
@@ -150,8 +90,9 @@
                   <img src="{{STATIC_URL}}img/pm-avatar.png" style="height:100%;">
               </button>
           </div>
+
       </div>
-  	</div>
+    </div>
   </header>
   <!--END NAVBAR-->
 
