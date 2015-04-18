@@ -130,19 +130,18 @@ class AddEvent(View):
 	def post(self, request, *args, **kwargs):
 		try:
 			events = Eventos(
-				eve_nom = "probando",
-				eve_fch = "2015-02-25",
-				eve_inf = "",
-				eve_url_img = (request.FILES['file'])
+				eve_nom = request.POST['nameEvent'],
+				eve_fch = request.POST['dateEvent'],
+				eve_inf = request.POST['informationEvent'],
+				eve_url_img = request.FILES['imageEvent']
 			)
 			events.save()
 
-			print request.FILES
-			print request.FILES.get('file')
-			
-			print request.POST.get('file')
-			print "************"
+			return HttpResponse(
+				json.dumps({"save":True}),
+		        content_type = "application/json; charset=utf8"
+		    )
 		except Exception, e:
 			print e
-"""===> END USERS <==="""
+"""===> END EVENTS <==="""
 
