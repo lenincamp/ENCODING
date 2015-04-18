@@ -15,13 +15,16 @@
 
 	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery.widget.min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/metro.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/libs/metro.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/metro-input-control.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/forms/ajax.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/forms/main/base.js"></script>   
+
 </head>
 
 <body class="metro">
 
-    <!--HEADER MAIN NAVBAR-->
+  <!--HEADER MAIN NAVBAR-->
   <header>
     <div class="navbar shadow">
       <div class="navbar-content container">        
@@ -39,7 +42,7 @@
                 </i> {{menu.men_des}} 
               </a>
               <ul class="dropdown-menu" data-role="dropdown">
-                {% for submenu in submenus %}                 
+                {% for submenu in submenus %}             
                   {% if menu.men_cod == submenu.men_cod_id and submenu.sbm_des != None %}                   
                     {% if submenu.sbm_men %}
                       <li>
@@ -59,7 +62,7 @@
                       </li>
                     {% else %}                      
                       <li style="margin-bottom:1px solid #ccc;">
-                        <a href="{{submenu.sbm_url}}"><i class="{{submenu.sbm_ico}}"></i> <b> {{submenu.sbm_des}} </b></a>
+                        <a href={{submenu.sbm_url}}><i class={{submenu.sbm_ico}}></i> <b> {{submenu.sbm_des}} </b></a>
                       </li>                 
                       <!--{% if not forloop.last %}
                         <li class="divider"></li>
@@ -68,34 +71,50 @@
                     {% endif %}
                   {% endif %}           
                 {% endfor %}
-              </ul>   
+              </ul>              
             </li>
           </ul>
         {% endfor %}
-        
+        <ul class="element-menu no-large">
+          <li>
+            <a class="dropdown-toggle" href="#">                  
+              <i class="icon-cog fg-darker" style="background-color:#fff;color:white;padding:10px;border-radius:50%"></i> Configuración                  
+            </a>
+            <ul class="dropdown-menu" data-role="dropdown">
+            <li>
+              <a href="#" id="changePasswordTb"><i class="icon-pencil"></i> Cambiar Clave</a>
+            </li>
+            <li>
+              <a href="/main/logout/"><i class="icon-exit"></i> Salir</a>
+            </li>
+          </ul>
+          </li>
+        </ul>
+
         <div class="no-tablet-portrait">
-              <span class="element-divider"></span>
-
-              <div class="element place-right">
-                  <a class="dropdown-toggle" href="#"><span class="icon-cog"></span></a>
-                  <ul class="dropdown-menu place-right" data-role="dropdown">
-                      <li><a href="#">Modificar Contraseña</a></li>
-                     
-                      <li><a href="/main/logout/">Salir</a></li>
-                  </ul>
-              </div>
-              <span class="element-divider place-right"></span>
-              <button class="element image-button image-left place-right large">
-                  {{user_name}}
-                  <img src="{{STATIC_URL}}img/pm-avatar.png" style="height:100%;">
-              </button>
+          <span class="element-divider"></span>
+          <div class="element place-right">
+            <a class="dropdown-toggle" href="#"><span class="icon-cog"></span></a>
+            <ul class="dropdown-menu place-right" data-role="dropdown">
+              <li>
+                <a href="#" id="changePassword"><i class="icon-pencil"></i> Cambiar Clave</a>
+              </li>
+              <li>
+                <a href="/main/logout/"><i class="icon-exit"></i> Salir</a>
+              </li>
+            </ul>
           </div>
-
+          <span class="element-divider place-right"></span>
+          <button class="element image-button image-left place-right large">
+            {{user_name}}
+            <img src="{{STATIC_URL}}img/pm-avatar.png" style="height:100%;">
+          </button>
+        </div>
       </div>
     </div>
   </header>
   <!--END NAVBAR-->
-
+  
 	{% block content %}
 		
 	{% endblock content %}

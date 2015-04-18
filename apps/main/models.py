@@ -63,7 +63,7 @@ class Eventos(models.Model):
     eve_nom = models.CharField(max_length=100, blank=True)
     eve_fch = models.DateField(blank=True, null=True)
     eve_inf = models.CharField(max_length=250, blank=True)
-    eve_url_img = models.CharField(max_length=250, blank=True)
+    eve_url_img = models.ImageField(upload_to='images', blank=True)
 
     class Meta:
         managed = False

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from unipath import Path
-BASE_DIR = Path(__file__).ancestor(2)
+BASE_DIR = Path(__file__).ancestor(3)
 
 
 # Quick-start development settings - unsuitable for production
@@ -74,7 +74,7 @@ USE_TZ = True
 
 """
     BASE_DIR = ...../projects
-    utilizar .ancestor(1) para retornar a la raíz
+    utilizar .ancestor(3) para retornar a la raíz
 """
 
 # Static files (CSS, JavaScript, Images)
@@ -83,9 +83,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
-    BASE_DIR.ancestor(1).child('templates'),
+    BASE_DIR.child('templates'),
 )
 
 STATICFILES_DIRS = (
-    BASE_DIR.ancestor(1).child('static'),
+    BASE_DIR.child('static'),
 )
+
+MEDIA_ROOT = BASE_DIR.child('media')
+MEDIA_URL = '/media/'

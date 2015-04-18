@@ -2,18 +2,14 @@
 {% extends "main/base.html" %}
 {% block content %}
 	<!--SECTION CONTAINER-->
-  <section class="container">
-    <article>
-      <h1 class="text-center" >
-        <!--a href="/"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
-        SVRA<small class="on-right">component</small-->
-      </h1>  
-      <div class="span4 offset5">
-        <img src="{{STATIC_URL}}img/vista_previa.png" title="Encoding Ideas">  
-      </div>
-      
-    </article>    
-  <section>
+  <div class="container grid fluid">    
+    <div class="row">
+      <div class="span4 offset4">
+        <img src="{{STATIC_URL}}img/vista_previa.png" title="Encoding Ideas" class="span10">  
+      </div>   
+    </div>     
+        
+  <div>
   <!--END CONTAINER-->
 
 {% endblock content %}
