@@ -1,44 +1,57 @@
 
 {% extends "main/base.html" %}
+
+{% block style %}
+  @import url("{{STATIC_URL}}css/forms/filterable.css");      
+{% endblock style %}
+
 {% block content %}
 	
   <div class="grid">
     <div class="row">      
       <div class="span5" style="border:solid #ccc 1px;padding:10px;margin-left:50px;">
-      	<!--div class="example"-->
-      		<form id="frmUsers">
-            	<fieldset>
-                  <legend>Usuario</legend>
-                  
-                  <input id="txtCi" name="ci" type="text" disabled="true" placeholder="Cédula" data-transform="input-control" maxlength="10" pattern=".{10}" required title="Debe tener 10 digitos" data-popover="popover" data-popover-position="right" data-popover-text="¡Cédula Incorrecta!" data-popover-background="bg-red" data-popover-color="fg-white"/>
+    		<form id="frmUsers">
+        	<fieldset>
+            <legend>Usuario</legend>
+                
+            <input id="txtCi" name="ci" type="text" disabled="true" placeholder="Cédula" data-transform="input-control" maxlength="10" pattern=".{10}" required title="Debe tener 10 digitos" data-popover="popover" data-popover-position="right" data-popover-text="¡Cédula Incorrecta!" data-popover-background="bg-red" data-popover-color="fg-white"/>
 
-                  <input id="txtName" name="name" type="text" disabled="true" placeholder="Nombres" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, minimo 8 digitos!" data-popover-background="bg-red" data-popover-color="fg-white"/>
+            <input id="txtName" name="name" type="text" disabled="true" placeholder="Nombres" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, minimo 8 digitos!" data-popover-background="bg-red" data-popover-color="fg-white"/>
 
-                  <input id="txtLastname" name="lastname" type="text" disabled="true" placeholder="Apellidos" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, minimo 8 digitos!" data-popover-background="bg-red" data-popover-color="fg-white"/>
-                  <input id="txtPhone" name="phone" type="text" disabled="true" placeholder="Teléfono" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, solo números!" data-popover-background="bg-red" data-popover-color="fg-white"/>
+            <input id="txtLastname" name="lastname" type="text" disabled="true" placeholder="Apellidos" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, minimo 8 digitos!" data-popover-background="bg-red" data-popover-color="fg-white"/>
+     
+            <input id="txtPhone" name="phone" type="text" disabled="true" placeholder="Teléfono" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, solo números!" data-popover-background="bg-red" data-popover-color="fg-white"/>
 
-                  <input id="txtAddress" name="address" type="text" disabled="true" placeholder="Dirección" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, minimo 8 digitos!" data-popover-background="bg-red" data-popover-color="fg-white"/>   
+            <input id="txtAddress" name="address" type="text" disabled="true" placeholder="Dirección" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, minimo 8 digitos!" data-popover-background="bg-red" data-popover-color="fg-white"/>   
 
-                	<select id="cmbTypeUser" name="typeUser" disabled="true" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, Seleccione un tipo de usuario!" data-popover-background="bg-red" data-popover-color="fg-white">
-                		<option value="0">Tipo de Usuario</option>
-                		{% for user_type in user_types %}
-                			<option value="{{user_type.tip_cod}}">{{user_type.tip_des}}</option>
-                		{% endfor %}
-                	</select>
-                	<hr>
+          	<select id="cmbTypeUser" name="typeUser" disabled="true" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, Seleccione un tipo de usuario!" data-popover-background="bg-red" data-popover-color="fg-white">
+            		<option value="0">Tipo de Usuario</option>
+            		{% for user_type in user_types %}
+            			<option value="{{user_type.tip_cod}}">{{user_type.tip_des}}</option>
+            		{% endfor %}
+          	</select>
+          	<hr>
 
-                  <input id="btnNuevo" type="button" class="default" style="margin-left:23px;" value="Nuevo">
-                  <input id="btnGuardar" type="submit" class="primary disabled" value="Guardar">
-                  <input id="btnBuscar" type="button" class="success" value="Buscar">
-                  <input id="btnCancelar" type="button" class="warning disabled" value="Cancelar">
+            <input id="btnNuevo" type="button" class="default" style="margin-left:63px;" value="Nuevo">
+            <input id="btnGuardar" type="submit" class="primary disabled" value="Guardar">
+            <!--input id="btnBuscar" type="button" class="success" value="Buscar"-->
+            <input id="btnCancelar" type="button" class="warning disabled" value="Cancelar">
 
-                </fieldset>
-            </form>            
-      	<!--/div-->
+          </fieldset>
+        </form>            
+
       </div>
       <div class="span11">
-        <!--div class="example"-->
-          <table class="table hovered bordered">
+        
+        
+        Buscar:
+        <div class="input-control text size3">
+          <input type="text" id="kwd_search"/>
+          <button class="btn-search"></button>
+        </div>
+        
+        <div style="max-height:380px; overflow-y:scroll;">
+          <table class="table hovered bordered" id="tblUsers">
             <thead class="bg-cyan fg-white">
               <tr>
                   <th class="text-center">#</th>
@@ -48,6 +61,7 @@
                   <th class="text-center">Dirección</th>
                   <th class="text-center">Tipo Usuario</th>
                   <th class="text-center" colspan="2">Acciones</th>
+          
               </tr>
             </thead>
 
@@ -55,7 +69,7 @@
             </tbody>
 
           </table>
-        <!--/div-->
+        </div>
       </div>
     </div>
     

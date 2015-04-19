@@ -1,4 +1,20 @@
 $(function(){
+
+    $("#kwd_search").keyup(function(){
+        // When value of the input is not blank
+        if( $(this).val() != "")
+        {
+            // Show only matching TR, hide rest of them
+            $("#tblUsers tbody>tr").hide();
+            $("#tblUsers td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+        }
+        else
+        {
+            // When there is no input or clean again, show everything back
+            $("#tblUsers tbody>tr").show();
+        }
+    });
+
     /*===VALIDACIONES===*/
     $('#frmUsers').validate({
         rules: {
@@ -68,15 +84,16 @@ $(function(){
 
         });
         users.html(datos);
+    
     }
     $.AJAX("/main/logged_user/create_user/load_users/","", $.loadUsers,true);
 
     $.unlockForm = function(){
-        $("input[type='text']").removeAttr('disabled');
+        $("frmUsers input[type='text']").removeAttr('disabled');
         $("select").removeAttr('disabled');
     }
     $.lockForm=function(){
-        $("input[type='text']").attr('disabled','true').val('');
+        $("frmUsers input[type='text']").attr('disabled','true').val('');
         $("select").attr('disabled','true').val('0');
     }
 
@@ -84,7 +101,7 @@ $(function(){
         $.unlockForm();
         $("#btnGuardar").removeClass('disabled');
         $("#btnCancelar").removeClass('disabled');
-        $("#btnBuscar").addClass('disabled');
+        //$("#btnBuscar").addClass('disabled');
         $(this).addClass('disabled');
 
     });
@@ -105,7 +122,7 @@ $(function(){
         $("#btnGuardar").removeClass('disabled');
         $("#btnGuardar").addClass('disabled');
         $("#btnNuevo").removeClass('disabled');
-        $("#btnBuscar").removeClass('disabled');        
+        //$("#btnBuscar").removeClass('disabled');        
         $.lockForm();
         $.AJAX("/main/logged_user/create_user/load_users/","", $.loadUsers,false);
     }
@@ -139,14 +156,14 @@ $(function(){
         $("#btnGuardar").removeClass('disabled');
         $("#btnGuardar").addClass('disabled');
         $("#btnNuevo").removeClass('disabled');
-        $("#btnBuscar").removeClass('disabled');
+        //$("#btnBuscar").removeClass('disabled');
         if (activeEdit){
             $.AJAX("/main/logged_user/create_user/load_users/","", $.loadUsers,true);
             activeEdit=false;
         }
     });
 
-    $("#btnBuscar").click(function(event) {
+    /*$("#btnBuscar").click(function(event) {
         $("input[type='button']").removeClass('disabled');
         $("input[type='button']").addClass('disabled');
         $("#btnGuardar").removeClass('disabled');
@@ -154,7 +171,7 @@ $(function(){
         $("#btnBuscar").removeClass('disabled');
         $("#btnCancelar").removeClass('disabled');
         $.unlockForm();
-    });
+    });*/
 
     var idU = 0;
     var activeEdit = false;
@@ -192,4 +209,12 @@ $(function(){
         });
     }
 
+});
+
+$.extend($.expr[":"], 
+{
+    "contains-ci": function(elem, i, match, array) 
+    {
+        return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
 });
