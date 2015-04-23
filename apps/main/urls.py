@@ -18,5 +18,11 @@ urlpatterns = patterns('',
     url(r'^logged_user/create_event/add_event/$', AddEvent.as_view(), name='main_eventos_AddEvent'),#--> load create events
     #================#
     url(r'^logout/$', LogoutUser.as_view(), name='main_usuario_Logout'),
+    #======= Producto ======#
+    url(r'^product/$', TemplateView.as_view(template_name="main/producto.html")),
+    url(r'^module/getProduct/$','apps.main.views.getProduct'),    
+    url(r'^module/saveProduct/$','apps.main.views.saveProduct'),
+    url(r'^module/getCategory/$','apps.main.views.getCategory'),
+    
     
 )
