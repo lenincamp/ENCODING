@@ -1,0 +1,13 @@
+#preview {
+background-color:#fff;
+display:block;
+float:right;
+width:50px;
+}
+
+#btn-form
+{
+    position: fixed;
+    float: left;
+    right: 35px;    
+}

@@ -157,33 +157,47 @@ def getProduct(request):
 
 def saveProduct(request):
 	if request.is_ajax():
-		
-		print request.FILES
+
+		print request.FILES 
 		print request.POST
 		if request.POST['edit'] == '1':
-			#MODIFY			
+			#MODIFY
+			print "==============	MODIFICANNNDOOOOO ========"			
 			product = Producto.objects.get(prd_cod = request.POST['codeProduct'])
 			product.prd_nom 		= request.POST['product']
 			product.prd_des 		= request.POST['description']
-			product.prd_pre 		= request.POST['price']
-			product.prd_est 		= request.POST['state']
+			product.prd_pre 		= request.POST['price']			
 			product.cat_cod_id 		= request.POST['category']
 			product.prd_nro_piezas 	= request.POST['pieces']
-			product.prd_url 		= request.FILES['imageFile']
+			if request.POST['withImage'] == "true":
+				print "==============	MODIFICANNNDOOOOO  CON IMAGEEEENNN ========"
+				product.prd_url 		= request.FILES['imageFile']
 			product.save()
 			return HttpResponse(json.dumps({"mensaje":"Actualizado con Ëxito"}),content_type= "application/json; charset=utf-8")
 		else:			
 			#SAVE
-			product = Producto(				
-				prd_nom 		= request.POST['product'],
-				prd_des 		= request.POST['description'],
-				prd_pre			= request.POST['price'],
-				#prd_ofr	= request.POST['oferta'],
-				prd_est 		= request.POST['state'],
-				cat_cod_id		= request.POST['category'],
-				prd_url 		= request.FILES['imageFile'],
-				prd_nro_piezas 	= request.POST['pieces'])
-			product.save()
+			print "===============  ENTREEEE AL GUARDAR  ========="
+			if request.POST['withImage'] == "true":
+				print "======== CON IMAGEEEENNNN ========="
+				product = Producto(				
+					prd_nom 		= request.POST['product'],
+					prd_des 		= request.POST['description'],
+					prd_pre			= request.POST['price'],
+					#prd_ofr	= request.POST['oferta'],				
+					cat_cod_id		= request.POST['category'],				
+					prd_url 		= request.FILES['imageFile'],
+					prd_nro_piezas 	= request.POST['pieces'])
+				product.save()
+			else:
+				print "======== SIN IMAGEEEENNNN ========="
+				product = Producto(				
+					prd_nom 		= request.POST['product'],
+					prd_des 		= request.POST['description'],
+					prd_pre			= request.POST['price'],
+					#prd_ofr	= request.POST['oferta'],				
+					cat_cod_id		= request.POST['category'],					
+					prd_nro_piezas 	= request.POST['pieces'])
+				product.save()
 			return HttpResponse(json.dumps({"mensaje":"Guardado con Éxito"}),content_type= "application/json; charset=utf-8")
 	else:
 		raise Http404

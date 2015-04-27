@@ -1,14 +1,19 @@
 {% extends "main/base.html" %}
+{% block title %}
+  Productos
+{% endblock title %}}
 {% block style %}  
-    @import url("{{STATIC_URL}}css/metro-ui/main.css");  
+    
 {% endblock style %}
 {% block  content %}
 <!-- ROW TABLA -->
 <br>                                
                                     
 <div class="panel-heading" >
-  <h3 class="panel-title" style="text-align: center;"><b>Productos</b>
+  <h3 class="panel-title" style="text-align: center;">
+    <b>Productos</b>
   </h3>
+
   <div id="btn-form">
     <button class="default" id="btnNew">
         <b>Nuevo</b>
@@ -28,99 +33,17 @@
             <th class="text-center fg-white">Categoria</th>
             <th class="text-center fg-white" colspan="2">Acción</th>
         </thead>
-        <tbody id="bodyTableModule">
-            
+        <tbody id="bodyTableModule">            
         </tbody>
     </table>
 </div>
                           
-<div class="span2"></div>              
-
-<div  class="primary" role="alert" id="message" style="display:none;width:350px;position:fixed;right: 10px;box-shadow: 5px 5px 5px #888888;z-index: 9999;">  
-</div>
-                   
+                                 
 <!--</div> -->  <!--final grid table -->
-
-                     
-        <!--      
-        <div class="container">
-            <div class="grid">
-                <div class="row">
-                    <div class="span4">
-                    <div class="span5">
-                       
-                        <form id="formProduct" enctype="multipart/form-data" method="POST">
-                           <fieldset>
-                               <legend>Nuevo Producto</legend>
-                            
-                             
-                               <div class="input-control text size7" data-role="input-control">
-                                   <input type="text" placeholder="Producto" id="textProduct">
-                               </div>
-                                
-                            
-                               <div class="input-control text size7" data-role="input-control">
-                                   <input type="text" placeholder="Descripcion" id="textDescription">
-                               </div>
-
-                            
-                               <div class="input-control text size7" data-role="input-control">
-                                   <input type="text" placeholder="0.00" id="textPrice">
-                               </div>
-                            
-                            
-                               <div class="input-control text size7" data-role="input-control">
-                                   <input type="text" placeholder="# Piezas" id="textPieces">
-                               </div>
-
-                      
-                               <div class="input-control file size7" data-role="input-control">
-                                   <input type="file" id="image_file" onchange="fileSelected();">
-                                   <button class="btn-file"></button>
-                               </div>
-                               <img id="preview" />
-                          
-                                <div class="input-control select size7" data-role="input-control">
-                                    <select id="cmbCategory">
-                                                        
-                                    </select>
-                                </div>
-
-                                <div class="input-control checkbox size7">
-                                    <label>
-                                    Estado
-                                        <input type="checkbox" id="checkState" />
-                                        <span class="check"></span>
-                                        
-                                    </label>
-                                </div>
-
-                                <div id="alert" style="display:none;" class="alert alert-danger"></div>                                    
-                                <input type="hidden" id="textIdProduct" value="0">
-
-                                <button type="button" class="warning" id="btnCancel">Cancelar</button>
-                                <button type="button" class="primary" id="btnSave" onclick="startUploading();">Guardar</button>
-
-                           </fieldset>
-                                
-                               
-                        </form>
-                            
-                  
-                    </div>
-                </div>
-            </div>                                                                                                            
-                          
-        </div>
-               
-
-                
-            
-         
-        <!END MODAL CURSO-->
     
 {% endblock%}
 
-{% block script %}    
+{% block script %}
+    
         <script type="text/javascript" src="{{ STATIC_URL }}js/forms/producto.js"></script>        
 {% endblock %}

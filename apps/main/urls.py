@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     #================#
     url(r'^logout/$', LogoutUser.as_view(), name='main_usuario_Logout'),
     #======= Producto ======#
-    url(r'^product/$', TemplateView.as_view(template_name="main/producto.html")),
+    url(r'^product/$', Login.as_view(template_name="main/producto.html"), name='main_product'),
     url(r'^module/getProduct/$','apps.main.views.getProduct'),    
     url(r'^module/saveProduct/$','apps.main.views.saveProduct'),
     url(r'^module/getCategory/$','apps.main.views.getCategory'),

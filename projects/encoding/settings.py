@@ -51,7 +51,7 @@ WSGI_APPLICATION = 'projects.encoding.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'catalogo_app',
+        'NAME': 'catalogo_app2',
         'USER':'postgres',
         'PASSWORD' : 'admin',
         'HOST':'localhost',

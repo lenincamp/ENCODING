@@ -16,83 +16,88 @@ $(function(){
                        "<td id="+val.cat_cod+">"+val.cat_cod__cat_nom+"</td>"+
                        "<td style='display:none'>"+val.prd_est+"</td>"+
                        "<td><button id='btnEdit"+(index+1)+"'   class='info'    onclick='$.edit($(this).parent())' >Editar</button></td>"+ 
-                       "<td><button id='btnDelete"+(index+1)+"' class='danger'  onclick='$.delete($(this).parent())' >Eliminar</button></td>"+
+                       "<td><button id='btnDelete"+(index+1)+"' class='danger'  onclick='$.modalDelete($(this).parent())' >Eliminar</button></td>"+
                        "</tr>"     
         });
         modulo.html(setData);
     }
 
-    var modalContent = " <div class='container'>"+
-            "<div class='grid'>"+
-                "<div class='row'>"+
-                    "<div class='span4'></div>"+
-                    "<div class='span7'>"+
+    var modalContent = //" <div class='container'>"+
+            
+                "<div class='row'>"+                    
+                    "<div class='span5'>"+
                         
-                        "<form id='formularioProduct' enctype='multipart/form-data'>"+
+                        "<form id='formularioProduct' enctype='multipart/form-data' class='user-inpult'>"+
                            "<fieldset>"+
-                               //"<legend>Nuevo Producto</legend>"+
+                               //"<legend class='text-center'>Nuevo Producto</legend>"+
                             
-                            
-                               "<div class='input-control text size7' data-role='input-control'>"+
+                                
+                               "<div class='input-control text size5' data-role='input-control'>"+
                                    "<input type='text' placeholder='Producto' id='textProduct' name='product'>"+
                                "</div>"+
                                 
-                            
+                                "<br>"+
                                
-                               "<div class='input-control text size7' data-role='input-control'>"+
+                               "<div class='input-control text size5' data-role='input-control'>"+
                                    "<input type='text' placeholder='Descripcion' id='textDescription' name='description'>"+
                                "</div>"+
 
+                                "<br>"+
                             
-                               "<div class='input-control text size7' data-role='input-control'>"+
+                               "<div class='input-control text size5' data-role='input-control'>"+
                                    "<input type='text' placeholder='0.00' id='textPrice' name='price'>"+
                                "</div>"+
                             
+                                "<br>"+
                             
-                               "<div class='input-control text size7' data-role='input-control'>"+
+                               "<div class='input-control text size5' data-role='input-control'>"+
                                    "<input type='text' placeholder='# Piezas' id='textPieces' name='pieces'>"+
                                "</div>"+
 
+                                "<br>"+
                             
-                               "<div class='input-control file size7' data-role='input-control'>"+
+                               "<div class='input-control file size5' data-role='input-control'>"+
                                    "<input type='file' id='image_file' name='imageFile'>"+
                                    "<button class='btn-file'></button>"+                                   
                                "</div>"+
-                                
-                                
+                               
+                               
+                              
+                                "<br>"+
                             
-                                "<div class='input-control select size7' data-role='input-control'>"+
+                                "<div class='input-control select size5' data-role='input-control'>"+
                                     "<select id='cmbCategory' name='category'>"+                                                        
                                     "</select>"+
                                 "</div>"+
 
-                                "<div class='input-control checkbox size7'>"+
-                                    "<label>"+
-                                    "Estado: "+
-                                        "<input type='checkbox' id='checkState' name='state'/>"+
-                                        "<span class='check'></span>"+
-                                        
-                                    "</label>"+
-                                "</div>"+
+                                "<br>"+
 
-                                
                                 "<input type='hidden' id='textIdProduct' name='codeProduct' value='0'>"+                                
                                 
-                                "<button type='button' class='warning' id='btnCancel' onclick='$.Dialog.close()'>Cancelar</button>"+                                                                
-                                "<button type='button' class='primary' id='btnSave' onclick='$.save();'>Guardar</button>"+
+                                "<div class='span5'>"+
+                                    "&nbsp; &nbsp; &nbsp;"+
+                                    "<button type='button' class='size2 warning' id='btnCancel' onclick='$.Dialog.close()'>Cancelar</button>"+                                 
+                                    "&nbsp; &nbsp; &nbsp;"+
+                                    "<button type='button' class='size2 primary' id='btnSave' onclick='$.save();'>Guardar</button>"+                                  
+                                "</div>"+
+                                
 
                            "</fieldset>"+
                                 
                                
                         "</form>"+                        
                        
+                    "</div>"+   // close first span
+                    
+                    "<div class='span5'>"+
                     "</div>"+
                 "</div>"+
-            "</div>"+
+            "</div>";
                           
-        "</div> ";
+        //"</div> ";
+    
 
-    $.modal = function(content, pad, wid,title){
+    $.modal = function(content, pad, width,title){
         $.Dialog({
             overlay: true,
             shadow: true,
@@ -100,9 +105,10 @@ $(function(){
             icon: '',
             title: title,
             content: '',
-            padding: pad,
-            width:wid,
-            onShow: function(_dialog){
+            padding: 10,
+            width:width,
+            draggable:true,
+            onShow: function(){
                 $.Dialog.content(content);
                 $.Metro.initInputs();
           }
@@ -110,7 +116,7 @@ $(function(){
     }
 
     $('#btnNew').click(function(){
-        $.modal(modalContent, 30,350 , "Nuevo");
+        $.modal(modalContent, 30,250, "Nuevo");
         $('#textProduct').focus();
         edit = 0;
         $.AJAX("/main/module/getCategory/","",$.getCategory,true);
@@ -160,67 +166,83 @@ $(function(){
         edit = 1;
     }
 
-    $.delete = function(parent)
+    $.modalDelete = function(parent)
     {
-        var tr = parent(parent);
+        var tr = $(parent).parent();
+        var modalDelete = "<p>¿Está seguro de eliminar el Producto?</p>"+
+                          "<button id='"+tr.attr('id')+"' onclick='$.deleteProduct($(this))'>Si</button>"+
+                          "<button id='btnCancel' onclick='$.closeModal()'>No</button>";
+        $.modal(modalDelete,30 , 100 , "Eliminar");
     }
 
-    $.message = function(response)
+    $.notification = function(response)
     {
-        $('#message').fadeIn('fast');
-        $('#message').html(response.mensaje);
-        $('#message').fadeOut(400);
+        
+          $.notify(response.mensaje,{position:'top right', className:'success', autoHide:true ,
+                                      autoHideDelay:3000});
+          //console.log("Hola soy una notificacion");
     }
+
+    $.deleteProduct = function(idProduct)
+    {      
+      $.AJAX("/main/module/deleteProduct/",{"prd_cod":$(idProduct).attr('id')} , $.notification, true);
+      $.AJAX("/main/module/getProduct/","",$.getProduct,false);
+      $.Dialog.close();
+    }
+
+    $.closeModal = function()
+    {
+      $.Dialog.close()
+    }
+    
 
     $.save = function(){
 
       if ($('#textProduct').val() != "" && $('#textDescription').val() != "" && $('#textPrice').val() != "")
-        {
-            // var producto    = $('#textProduct').val()
-            // var descripcion = $('#textDescription').val()
-            // var precio      = $('#textPrice').val()
-            // var estado      = $('#checkState').val()
-            // var categoria   = $('#cmbCategory').val()
-            // var nro_piezas  = $('#textPieces').val()
-            // var image       = $('#textFile').val()            
-            // $.AJAX("/main/module/saveProduct/",
-            //   {"prd_nom": producto , "prd_des" : descripcion , "prd_pre":precio ,
-            //    "prd_est":estado , "cat_cod":categoria, "prd_cod":$('#textIdProduct').val() , 
-            //    "prd_url": image , "prd_nro_piezas":nro_piezas ,"edit" : edit },$.message,false);
+        {                        
+            
           var formData = new FormData($("#formularioProduct")[0]); // datos
-          formData.append('edit', edit);
+          formData.append('edit', edit);          
+          //($('#checkState').is(':checked')) ? formData.append('stateUnique',"true"):formData.append('stateUnique',"false")// nice conditional
+          $('#image_file').val() != "" ? formData.append('withImage',"true"): formData.append('withImage',"false")
+
           $.ajax({
+            async:false,
             url:'/main/module/saveProduct/',
             type: 'POST',
             data: formData,
               //necesario para subir archivos via ajax
             cache: false,
             contentType: false,
-            processData: false,
-              // mientras se envia el archivo
-            beforeSend: function(){               
-                  $.Notify({style: {background: '#008287', color: 'white'}, caption: 'Info...', content: "Subiendo la imagen, por favor espere..."});
-              },
-              //si finalizo correctamente
-            success: function(data){
-                  message = $("<span class='success'>La imagen ha subido correctamente.</span>");
-                  console.log(message);
-                  if (data.save){
-                    $.Notify({style: {background: '#008287', color: 'white'}, caption: 'Info...', content: "Guardado Correctamente..."});
-                  }
-              },
-              //si ocurrido un error
-              error: function(){
-                  $.Notify({style: {background: '#008287', color: 'white'}, caption: 'Info...', content: "Error al almacenar imagen..."});
-              }
-          })
-
-        }         
-
-        
+            processData: false,            
+            //mientras se envia el archivo            
+            // beforeSend: function(){               
+            //       $.Notify({style: {background: '#008287', color: 'white'}, caption: 'Info...', content: "Subiendo la imagen, por favor espere..."});
+            //   },
+            
+            //si finalizo correctamente
+            success: function(data)
+            {         
+              //$.Notify({style: {background: '#669900', color: 'white'}, caption: 'Info...', content: data.mensaje});
+              $.notify(data.mensaje,{position:'top right', className:'success', autoHide:true ,
+                                      autoHideDelay:3000});
+            },
+            
+            //si ocurrido un error
+            // error: function(){
+            //     $.Notify({style: {background: '#a80000', color: 'white'}, caption: 'Info...', content: "Error al almacenar imagen..."});
+            // },                       
+          
+          })           
+          $.AJAX("/main/module/getProduct/","",$.getProduct,false);
+        }
+        else{
+          $.notify("Hay algun campo vacío",{position:'top right', className:'error', autoHide:true ,
+                    autoHideDelay:3000})
+        }                 
         $.Dialog.close();
-        $.AJAX("/main/module/getProduct/","",$.getProduct,false);
+        
     }
     
-    $.AJAX("/main/module/getProduct/","",$.getProduct,true);    
+    $.AJAX("/main/module/getProduct/","",$.getProduct,true);
 })
