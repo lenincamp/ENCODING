@@ -23,6 +23,14 @@ urlpatterns = patterns('',
     url(r'^module/getProduct/$','apps.main.views.getProduct'),    
     url(r'^module/saveProduct/$','apps.main.views.saveProduct'),
     url(r'^module/getCategory/$','apps.main.views.getCategory'),
+    url(r'^module/deleteProduct/$','apps.main.views.deleteProduct'),
+
+    #========== Categoria =====================0
+    url(r'^category/$', Login.as_view(template_name="main/categoria.html"), name="main_category"),
+    url(r'^module/getCategory/$','apps.main.views.getCategory'),
+    url(r'^module/saveCategory/$','apps.main.views.saveCategory'),
+    url(r'^module/updateCategory/$','apps.main.views.updateCategory'),
+    
     
     
 )

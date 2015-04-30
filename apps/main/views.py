@@ -205,9 +205,10 @@ def saveProduct(request):
 
 def deleteProduct(request):
 	if request.is_ajax():
+		print "==========ELIMINANDO EL PRODUCTOOOOO================="
 		product = Producto.objects.get(prd_cod = request.POST['prd_cod'])
 		product.delete()
-		return HttpResponse(json.dumps({"mensaje":"Producto Eliminado con éxito"}),content_type= "application/json : charset=utf-8")
+		return HttpResponse(json.dumps({"mensaje":"Producto Eliminado con Éxito"}),content_type= "application/json : charset=utf-8")
 	else:
 		raise Http404
 
@@ -241,6 +242,15 @@ def updateCategory(request):
 		return HttpResponse(json.dumps({"mensaje":"Categoria Actualizada con éxito"}),content_type= "application/json : charset=utf-8")
 	else:
 		raise Http404
+
+def deleteCategory(request):
+	if request.is_ajax():
+		category = Categoria.objects.get(cat_cod = request.POST['cat_cod'])
+		category.cat_est = False
+		category.save()
+		return HttpResponse(json.dumps({"mensaje":"Categoria Eliminada con Éxito"}), content_type="application/json : charset=utf-8")
+	else:
+		return Http404
 
 def savePiece(request):
 	if request.is_ajax():
