@@ -95,28 +95,9 @@ $(function(){
             "</div>";
                           
         //"</div> ";
-    
-
-    $.modal = function(content, pad, width,title){
-        $.Dialog({
-            overlay: true,
-            shadow: true,
-            flat: true,
-            icon: '',
-            title: title,
-            content: '',
-            padding: 10,
-            width:width,
-            draggable:true,
-            onShow: function(){
-                $.Dialog.content(content);
-                $.Metro.initInputs();
-          }
-        });
-    }
 
     $('#btnNew').click(function(){
-        $.modal(modalContent, 30,250, "Nuevo");
+        $.DIALOG(modalContent, 30,250, "Nuevo");
         $('#textProduct').focus();
         edit = 0;
         $.AJAX("/main/module/getCategory/","",$.getCategory,true);
@@ -143,7 +124,7 @@ $(function(){
         
         var tr = $(parent).parent(); //
 
-        $.modal(modalContent, 10 , 100, "Editar"); // set Modal
+        $.DIALOG(modalContent, 10 , 100, "Editar"); // set Modal
         $.AJAX("/main/module/getCategory/","",$.getCategory,false); //fill out Categories
 
         $('#textProduct').val(tr.children()[1].textContent);        
@@ -172,7 +153,7 @@ $(function(){
         var modalDelete = "<p>¿Está seguro de eliminar el Producto?</p>"+
                           "<button id='"+tr.attr('id')+"' onclick='$.deleteProduct($(this))'>Si</button>"+
                           "<button id='btnCancel' onclick='$.closeModal()'>No</button>";
-        $.modal(modalDelete,30 , 100 , "Eliminar");
+        $.DIALOG(modalDelete,30 , 100 , "Eliminar");
     }
 
     $.notification = function(response)

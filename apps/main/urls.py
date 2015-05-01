@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     url(r'^category/$', Login.as_view(template_name="main/categoria.html"), name="main_category"),
     url(r'^module/getCategory/$','apps.main.views.getCategory'),
     url(r'^module/saveCategory/$','apps.main.views.saveCategory'),
-    url(r'^module/updateCategory/$','apps.main.views.updateCategory'),
+    url(r'^module/deleteCategory/$','apps.main.views.deleteCategory'),
     
     
     
