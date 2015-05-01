@@ -116,7 +116,7 @@ class Producto(models.Model):
     prd_est = models.NullBooleanField()
     cat_cod = models.ForeignKey(Categoria, db_column='cat_cod', blank=True, null=True)
     prd_cod = models.AutoField(primary_key=True)
-    prd_url = models.CharField(max_length=250, blank=True)
+    prd_url = models.ImageField(upload_to='images',max_length=250, blank=True)
     prd_nro_piezas = models.IntegerField(blank=True, null=True)
 
     class Meta:

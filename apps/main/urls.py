@@ -18,5 +18,19 @@ urlpatterns = patterns('',
     url(r'^logged_user/create_event/add_event/$', AddEvent.as_view(), name='main_eventos_AddEvent'),#--> load create events
     #================#
     url(r'^logout/$', LogoutUser.as_view(), name='main_usuario_Logout'),
+    #======= Producto ======#
+    url(r'^product/$', Login.as_view(template_name="main/producto.html"), name='main_product'),
+    url(r'^module/getProduct/$','apps.main.views.getProduct'),    
+    url(r'^module/saveProduct/$','apps.main.views.saveProduct'),
+    url(r'^module/getCategory/$','apps.main.views.getCategory'),
+    url(r'^module/deleteProduct/$','apps.main.views.deleteProduct'),
+
+    #========== Categoria =====================0
+    url(r'^category/$', Login.as_view(template_name="main/categoria.html"), name="main_category"),
+    url(r'^module/getCategory/$','apps.main.views.getCategory'),
+    url(r'^module/saveCategory/$','apps.main.views.saveCategory'),
+    url(r'^module/updateCategory/$','apps.main.views.updateCategory'),
+    
+    
     
 )

@@ -145,3 +145,120 @@ class AddEvent(View):
 			print e
 """===> END EVENTS <==="""
 
+"""===> PRODUCT <==== """
+
+def getProduct(request):
+	if request.is_ajax():			
+		product = Producto.objects.select_related('cat_cod').order_by('prd_cod')
+		sendData = product.values('prd_cod','prd_nom','prd_pre','prd_des','prd_nro_piezas','prd_est','cat_cod__cat_nom' , 'cat_cod')
+		return HttpResponse(json.dumps(list(sendData)),content_type = "application/json; charset=utf-8")
+	else:
+		raise Http404
+
+def saveProduct(request):
+	if request.is_ajax():
+
+		print request.FILES 
+		print request.POST
+		if request.POST['edit'] == '1':
+			#MODIFY
+			print "==============	MODIFICANNNDOOOOO ========"			
+			product = Producto.objects.get(prd_cod = request.POST['codeProduct'])
+			product.prd_nom 		= request.POST['product']
+			product.prd_des 		= request.POST['description']
+			product.prd_pre 		= request.POST['price']			
+			product.cat_cod_id 		= request.POST['category']
+			product.prd_nro_piezas 	= request.POST['pieces']
+			if request.POST['withImage'] == "true":
+				print "==============	MODIFICANNNDOOOOO  CON IMAGEEEENNN ========"
+				product.prd_url 		= request.FILES['imageFile']
+			product.save()
+			return HttpResponse(json.dumps({"mensaje":"Actualizado con Ëxito"}),content_type= "application/json; charset=utf-8")
+		else:			
+			#SAVE
+			print "===============  ENTREEEE AL GUARDAR  ========="
+			if request.POST['withImage'] == "true":
+				print "======== CON IMAGEEEENNNN ========="
+				product = Producto(				
+					prd_nom 		= request.POST['product'],
+					prd_des 		= request.POST['description'],
+					prd_pre			= request.POST['price'],
+					#prd_ofr	= request.POST['oferta'],				
+					cat_cod_id		= request.POST['category'],				
+					prd_url 		= request.FILES['imageFile'],
+					prd_nro_piezas 	= request.POST['pieces'])
+				product.save()
+			else:
+				print "======== SIN IMAGEEEENNNN ========="
+				product = Producto(				
+					prd_nom 		= request.POST['product'],
+					prd_des 		= request.POST['description'],
+					prd_pre			= request.POST['price'],
+					#prd_ofr	= request.POST['oferta'],				
+					cat_cod_id		= request.POST['category'],					
+					prd_nro_piezas 	= request.POST['pieces'])
+				product.save()
+			return HttpResponse(json.dumps({"mensaje":"Guardado con Éxito"}),content_type= "application/json; charset=utf-8")
+	else:
+		raise Http404
+	
+
+def deleteProduct(request):
+	if request.is_ajax():
+		print "==========ELIMINANDO EL PRODUCTOOOOO================="
+		product = Producto.objects.get(prd_cod = request.POST['prd_cod'])
+		product.delete()
+		return HttpResponse(json.dumps({"mensaje":"Producto Eliminado con Éxito"}),content_type= "application/json : charset=utf-8")
+	else:
+		raise Http404
+
+def getCategory(request):
+	if request.is_ajax():
+		category = Categoria.objects.all()
+		return HttpResponse(json.dumps(list(category.values())),content_type= "application/json ; charset=utf-8")
+	else:
+		raise Http404
+
+def saveCategory(request):
+	if request.is_ajax():
+		category = Categoria(
+			cat_nom 	= request.POST['cat_nom'],
+			cat_des 	= request.POST['cat_des'],
+			cat_est 	= request.POST['cat_est'],
+			cat_url 	= request.POST['cat_url'])
+		category.save()
+		return HttpResponse(json.dumps({"mensaje":"Categoria Guardada con éxito"}),content_type= "application/json : charset=utf-8")
+	else:
+		raise Http404
+
+def updateCategory(request):
+	if request.is_ajax():
+		category = Categoria.objects.get(cat_cod = request.POST['cat_cod'])
+		category.cat_nom = request.POST['cat_nom']
+		category.cat_des = request.POST['cat_des']
+		category.cat_est = request.POST['cat_est']
+		category.cat_url = request.POST['cat_url']
+		category.save()
+		return HttpResponse(json.dumps({"mensaje":"Categoria Actualizada con éxito"}),content_type= "application/json : charset=utf-8")
+	else:
+		raise Http404
+
+def deleteCategory(request):
+	if request.is_ajax():
+		category = Categoria.objects.get(cat_cod = request.POST['cat_cod'])
+		category.cat_est = False
+		category.save()
+		return HttpResponse(json.dumps({"mensaje":"Categoria Eliminada con Éxito"}), content_type="application/json : charset=utf-8")
+	else:
+		return Http404
+
+def savePiece(request):
+	if request.is_ajax():
+		piece = Pieza(
+			pie_cod		= request.POST['pie_cod'],
+			pie_nom 	= request.POST['pie_nom'],
+			prd_cod_id 	= request.POST['prd_cod'],
+			pie_num 	= request.POST['pie_num'])
+		piece.save()
+	else:
+		raise Http404
