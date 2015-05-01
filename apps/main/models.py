@@ -20,7 +20,7 @@ class Categoria(models.Model):
     cat_nom = models.CharField(max_length=100, blank=True)
     cat_des = models.CharField(max_length=250, blank=True)
     cat_est = models.NullBooleanField()
-    cat_url = models.CharField(max_length=250, blank=True)
+    cat_url = models.ImageField(upload_to='images',max_length=250, blank=True)
 
     class Meta:
         managed = False

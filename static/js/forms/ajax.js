@@ -15,8 +15,10 @@ $(function () {
 			}
 		});
 	};
+	
 	$.DIALOG = function(content, pad, wid, tit, ico){
 		$.Dialog({
+			draggable: true,
 	    	overlay: true,
 	    	shadow: true,
 	      	flat: true,
