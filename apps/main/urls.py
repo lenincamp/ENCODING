@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     # ==> Events <== #
     url(r'^logged_user/create_event/$', Login.as_view(template_name="main/logged_user_events.html"), name='main_events_load'),#--> load create events
     url(r'^logged_user/create_event/add_event/$', AddEvent.as_view(), name='main_eventos_AddEvent'),#--> load create events
+    url(r'^logged_user/search_event/$', Login.as_view(template_name="main/logged_user_events_search.html"), name='main_events_load_search'),#--> load search events
+    url(r'^logged_user/events/load_events/$', LoadEvents.as_view(), name='main_events_load'),#--> load events
+    url(r'^logged_user/events/info_event/$', InfoEvents.as_view(), name='main_events_info'),#--> load info events
     #================#
     url(r'^logout/$', LogoutUser.as_view(), name='main_usuario_Logout'),
     #======= Producto ======#
@@ -29,7 +32,7 @@ urlpatterns = patterns('',
     url(r'^category/$', Login.as_view(template_name="main/categoria.html"), name="main_category"),
     url(r'^module/getCategory/$','apps.main.views.getCategory'),
     url(r'^module/saveCategory/$','apps.main.views.saveCategory'),
-    url(r'^module/updateCategory/$','apps.main.views.updateCategory'),
+    url(r'^module/deleteCategory/$','apps.main.views.deleteCategory'),
     
     
     

@@ -89,11 +89,11 @@ $(function(){
     $.AJAX("/main/logged_user/create_user/load_users/","", $.loadUsers,true);
 
     $.unlockForm = function(){
-        $("frmUsers input[type='text']").removeAttr('disabled');
+        $("#frmUsers input[type='text']").removeAttr('disabled');
         $("select").removeAttr('disabled');
     }
     $.lockForm=function(){
-        $("frmUsers input[type='text']").attr('disabled','true').val('');
+        $("#frmUsers input[type='text']").attr('disabled','true').val('');
         $("select").attr('disabled','true').val('0');
     }
 
