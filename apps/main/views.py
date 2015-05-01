@@ -143,6 +143,34 @@ class AddEvent(View):
 		    )
 		except Exception, e:
 			print e
+class LoadEvents(View):
+	def post(self, request, *args, **kwargs):
+		try:
+			if request.is_ajax():
+				eventos = Eventos.objects.all().values()
+				return HttpResponse(
+					json.dumps(list(eventos),cls=DjangoJSONEncoder),
+					content_type = "application/json; charset=utf8"
+				)
+			else:
+				raise Http404("Eventos No Existe")
+
+		except Exception, e:
+			raise e
+class InfoEvents( View ):
+	def post(self, request, *args, **kwargs):
+		try:
+			if request.is_ajax():
+				
+				return HttpResponse(
+					json.loads(),
+					content_type = "application/json; charset=utf8"
+				)
+			else: 
+				raise Http404("Error en la lectura de información de eventos")	
+		except Exception, e:
+			raise e
+			
 """===> END EVENTS <==="""
 
 """===> PRODUCT <==== """
