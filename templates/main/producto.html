@@ -8,26 +8,40 @@
 {% block  content %}
 <!-- ROW TABLA -->
 <br>                                
-                                    
-<div class="panel-heading" >
-  <h3 class="panel-title" style="text-align: center;">
-    <b>Productos</b>
-  </h3>
 
-  <div id="btn-form">
-    <button class="default" id="btnNew">
-        <b>Nuevo</b>
-    </button>
-  </div>
-</div>
+<div class="grid">
+  <div class="row">
+    <div class="container" style="border:solid #ccc 1px;margin: 0px auto;padding: 10px 30px;">
+
+      <div class="panel-heading" >
+        <h3 class="panel-title" style="text-align: center;">
+          Productos
+        </h3>
+        <hr class="thin">
+        <br>
+        
+        
+          Buscar:
+          <div class="input-control text size3">
+            <input type="text" id="textSearch"/>
+            <button class="btn-search"></button>
+          </div>        
+
+          <button class="primary size2" id="btnNew">
+            <b>Nuevo</b>
+          </button>         
+        
+
+        <div id="btn-form">
+        </div>
+      </div>                     
                         
-                        
-<div class="container">
-    <table class="table hovered bordered" id="tabla">
+    <table class="table hovered bordered" id="tableProduct">
         <thead class="bg-blue">
             <th class="text-center fg-white">#</th>
             <th class="text-center fg-white">Producto</th>
             <th class="text-center fg-white">Descripción</th>
+            <th class="text-center fg-white">Imagen</th>
             <th class="text-center fg-white">Precio</th>
             <th class="text-center fg-white"># Pieces</th>
             <th class="text-center fg-white">Category</th>
@@ -36,11 +50,11 @@
         <tbody id="bodyTableModule">            
         </tbody>
     </table>
-</div>
-                          
-                                 
-<!--</div> -->  <!--final grid table -->
-    
+  </div> <!-- close div container -->
+  </div>  
+</div>                                    
+                   
+                                
 {% endblock%}
 
 {% block script %}    

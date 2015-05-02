@@ -143,34 +143,6 @@ class AddEvent(View):
 		    )
 		except Exception, e:
 			print e
-class LoadEvents(View):
-	def post(self, request, *args, **kwargs):
-		try:
-			if request.is_ajax():
-				eventos = Eventos.objects.all().values()
-				return HttpResponse(
-					json.dumps(list(eventos),cls=DjangoJSONEncoder),
-					content_type = "application/json; charset=utf8"
-				)
-			else:
-				raise Http404("Eventos No Existe")
-
-		except Exception, e:
-			raise e
-class InfoEvents( View ):
-	def post(self, request, *args, **kwargs):
-		try:
-			if request.is_ajax():
-				
-				return HttpResponse(
-					json.loads(),
-					content_type = "application/json; charset=utf8"
-				)
-			else: 
-				raise Http404("Error en la lectura de información de eventos")	
-		except Exception, e:
-			raise e
-			
 """===> END EVENTS <==="""
 
 """===> PRODUCT <==== """
@@ -178,14 +150,16 @@ class InfoEvents( View ):
 def getProduct(request):
 	if request.is_ajax():			
 		product = Producto.objects.select_related('cat_cod').order_by('prd_cod')
-		sendData = product.values('prd_cod','prd_nom','prd_pre','prd_des','prd_nro_piezas','prd_est','cat_cod__cat_nom' , 'cat_cod' , 'prd_url')
+		sendData = product.values('prd_cod','prd_nom','prd_pre','prd_des','prd_nro_piezas','prd_est','cat_cod__cat_nom' , 'cat_cod')
 		return HttpResponse(json.dumps(list(sendData)),content_type = "application/json; charset=utf-8")
 	else:
 		raise Http404
 
 def saveProduct(request):
 	if request.is_ajax():
-		
+
+		print request.FILES 
+		print request.POST
 		if request.POST['edit'] == '1':
 			#MODIFY
 			print "==============	MODIFICANNNDOOOOO ========"			
@@ -209,7 +183,7 @@ def saveProduct(request):
 					prd_nom 		= request.POST['product'],
 					prd_des 		= request.POST['description'],
 					prd_pre			= request.POST['price'],
-					prd_est			= True,				
+					#prd_ofr	= request.POST['oferta'],				
 					cat_cod_id		= request.POST['category'],				
 					prd_url 		= request.FILES['imageFile'],
 					prd_nro_piezas 	= request.POST['pieces'])
@@ -220,7 +194,7 @@ def saveProduct(request):
 					prd_nom 		= request.POST['product'],
 					prd_des 		= request.POST['description'],
 					prd_pre			= request.POST['price'],
-					prd_est			= True,
+					#prd_ofr	= request.POST['oferta'],				
 					cat_cod_id		= request.POST['category'],					
 					prd_nro_piezas 	= request.POST['pieces'])
 				product.save()
@@ -238,45 +212,34 @@ def deleteProduct(request):
 	else:
 		raise Http404
 
-
-""" =============== CATEGORIAS ====================="""
-
 def getCategory(request):
 	if request.is_ajax():
-		category = Categoria.objects.all().order_by('cat_cod').filter(cat_est = True)
+		category = Categoria.objects.all()
 		return HttpResponse(json.dumps(list(category.values())),content_type= "application/json ; charset=utf-8")
 	else:
 		raise Http404
 
 def saveCategory(request):
 	if request.is_ajax():
-		if request.POST['edit'] == '1': #MODIFICAR
-			
-			category = Categoria.objects.get(cat_cod = request.POST['cat_cod'])
-			category.cat_nom 	=	request.POST['cat_nom']
-			category.cat_des 	=	request.POST['cat_des']
-			if request.POST['withImage'] ==	"true":
-				category.cat_url 	=	request.FILES['cat_url']
-			category.save()
-		
-		#=======GUARDAR ===========
-		else:			
-			if request.POST['withImage'] ==	"true":
-				category = Categoria(
-					cat_nom 	= request.POST['cat_nom'],
-					cat_des 	= request.POST['cat_des'],					
-					cat_url 	= request.FILES['cat_url'],
-					cat_est 	= True,
-					)
-				category.save()
-			else:
-				category = Categoria(
-					cat_nom 	= request.POST['cat_nom'],
-					cat_des 	= request.POST['cat_des'],
-					cat_est 	= True,
-					)
-				category.save()
-			return HttpResponse(json.dumps({"mensaje":"Guardada con éxito"}),content_type= "application/json : charset=utf-8")
+		category = Categoria(
+			cat_nom 	= request.POST['cat_nom'],
+			cat_des 	= request.POST['cat_des'],
+			cat_est 	= request.POST['cat_est'],
+			cat_url 	= request.POST['cat_url'])
+		category.save()
+		return HttpResponse(json.dumps({"mensaje":"Categoria Guardada con éxito"}),content_type= "application/json : charset=utf-8")
+	else:
+		raise Http404
+
+def updateCategory(request):
+	if request.is_ajax():
+		category = Categoria.objects.get(cat_cod = request.POST['cat_cod'])
+		category.cat_nom = request.POST['cat_nom']
+		category.cat_des = request.POST['cat_des']
+		category.cat_est = request.POST['cat_est']
+		category.cat_url = request.POST['cat_url']
+		category.save()
+		return HttpResponse(json.dumps({"mensaje":"Categoria Actualizada con éxito"}),content_type= "application/json : charset=utf-8")
 	else:
 		raise Http404
 
@@ -288,9 +251,6 @@ def deleteCategory(request):
 		return HttpResponse(json.dumps({"mensaje":"Categoria Eliminada con Éxito"}), content_type="application/json : charset=utf-8")
 	else:
 		return Http404
-
-
-"""========== PIEZAS ================"""
 
 def savePiece(request):
 	if request.is_ajax():

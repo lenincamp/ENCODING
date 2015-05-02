@@ -14,12 +14,33 @@ $(function(){
                     "<td>"+(index+1)+"</td>"+
                     "<td>"+data.cat_nom+"</td>"+
                     "<td>"+data.cat_des+"</td>"+
-                    "<td><button id='btnEdit"+(index+1)+"'   class='info'    onclick='$.edit($(this).parent())' >Editar</button></td>"+ 
-                    "<td><button id='btnDelete"+(index+1)+"' class='danger'  onclick='$.modalDelete($(this).parent())' >Eliminar</button></td>"+
+                    "<td id="+data.cat_url+">"+
+                            '<button class="default" title="Ver" onclick="$.showImage(this);">'+
+                                '<i class="icon-pictures" title="Ver"></i>'+
+                            '</button>'+
+                    "</td>"+
+                    "<td>"+
+                        "<button id='btnEdit"+(index+1)+"' class='primary title='Editar onclick='$.edit($(this).parent());'>"+
+                            "<i class='icon-pencil' title='Editar'></i>"+
+                        "</button>"+
+                    "</td>"+
+                    "<td>"+
+                        "<button id='btnDelete"+(index+1)+"' class='danger' title='Eliminar' onclick='$.modalDelete($(this).parent());'>"+
+                            "<i class='icon-remove' title='Eliminar'></i>"
+                        "</button>"+
+                    "</td>"+
+                    //"<td><button id='btnEdit"+(index+1)+"'   class='info'    onclick='$.edit($(this).parent())' >Editar</button></td>"+ 
+                    //"<td><button id='btnDelete"+(index+1)+"' class='danger'  onclick='$.modalDelete($(this).parent())' >Eliminar</button></td>"+
                     "</tr>";                   
         });
 
         category.html(setData);
+    }
+
+    $.showImage = function (btn) {
+        var url = $($(btn).parent('td')).attr('id');
+        var content = "<img src=/media/"+url+" class='shadow' style='width: 620px; height: 400px;''>"
+        $.DIALOG(content,0,250,"Imagen","icon-pictures");
     }
 
     $.notification = function(data)
