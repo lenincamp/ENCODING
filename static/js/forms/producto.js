@@ -40,7 +40,7 @@ $(function(){
     $.showImage = function (btn) {
         var url = $($(btn).parent('td')).attr('id');
         var content = "<img src=/media/"+url+" class='shadow' style='width: 620px; height: 400px;''>"
-        $.DIALOG(content,0,250,"Imagen","icon-pictures");
+        $.DIALOG(content,0,250,$(btn).parent().parent().children()[1].textContent,"icon-pictures");
     }
 
     $("#textSearch").keyup(function(){
