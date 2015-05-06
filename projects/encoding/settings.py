@@ -51,10 +51,10 @@ WSGI_APPLICATION = 'projects.encoding.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'catalogo_app',
+        'NAME': 'catalogar_app',
         'USER':'postgres',
-        'PASSWORD' : 'admin',
-        'HOST':'localhost',
+        'PASSWORD' : 'admin123',
+        'HOST':'192.168.1.8',
         'PORT' : '5432',
     }
 }

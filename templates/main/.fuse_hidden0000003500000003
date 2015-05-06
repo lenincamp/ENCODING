@@ -1,6 +1,6 @@
 {% extends "main/base.html" %}
 {% block title %}
-  Categoria
+  Productos
 {% endblock title %}}
 {% block style %}  
     
@@ -11,24 +11,26 @@
                                     
 <div class="panel-heading" >
   <h3 class="panel-title" style="text-align: center;">
-    <b>Categoria</b>
+    <b>Productos</b>
   </h3>
 
   <div id="btn-form">
     <button class="default" id="btnNew">
-        <b>New</b>
+        <b>Nuevo</b>
     </button>
   </div>
 </div>
                         
                         
 <div class="container">
-    <table class="table hovered bordered">
+    <table class="table hovered bordered" id="tabla">
         <thead class="bg-blue">
             <th class="text-center fg-white">#</th>
-            <th class="text-center fg-white">Nombre</th>
+            <th class="text-center fg-white">Producto</th>
             <th class="text-center fg-white">Descripción</th>
-            <th class="text-center fg-white">Imagen</th>
+            <th class="text-center fg-white">Precio</th>
+            <th class="text-center fg-white"># Pieces</th>
+            <th class="text-center fg-white">Category</th>
             <th class="text-center fg-white" colspan="2">Acción</th>
         </thead>
         <tbody id="bodyTableModule">            
@@ -42,5 +44,5 @@
 {% endblock%}
 
 {% block script %}    
-        <script type="text/javascript" src="{{ STATIC_URL }}js/forms/categoria.js"></script>        
+        <script type="text/javascript" src="{{ STATIC_URL }}js/forms/producto.js"></script>        
 {% endblock %}

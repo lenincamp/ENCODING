@@ -11,16 +11,60 @@ $(function(){
                        "<td id="+(index+1)+">"+(index+1)+"</td>"+
                        "<td>"+val.prd_nom+"</td>"+
                        "<td>"+val.prd_des+"</td>"+
+                       "<td id="+val.prd_url+">"+
+                            '<button class="default" title="Ver" onclick="$.showImage(this);">'+
+                                '<i class="icon-pictures" title="Ver"></i>'+
+                            '</button>'+
+                       "</td>"+
                        "<td>"+val.prd_pre+"</td>"+
                        "<td>"+val.prd_nro_piezas+"</td>"+                       
                        "<td id="+val.cat_cod+">"+val.cat_cod__cat_nom+"</td>"+
                        "<td style='display:none'>"+val.prd_est+"</td>"+
-                       "<td><button id='btnEdit"+(index+1)+"'   class='info'    onclick='$.edit($(this).parent())' >Editar</button></td>"+ 
-                       "<td><button id='btnDelete"+(index+1)+"' class='danger'  onclick='$.modalDelete($(this).parent())' >Eliminar</button></td>"+
-                       "</tr>"     
+                       "<td>"+
+                            "<button id='btnEdit"+(index+1)+"' class='primary title='Editar onclick='$.edit($(this).parent());'>"+
+                                "<i class='icon-pencil' title='Editar'></i>"+
+                            "</button>"+
+                        "</td>"+
+                        "<td>"+
+                            "<button id='btnDelete"+(index+1)+"' class='danger' title='Eliminar' onclick='$.modalDelete($(this).parent());'>"+
+                                "<i class='icon-remove' title='Eliminar'></i>"
+                            "</button>"+
+                        "</td>"+
+                       //"<td><button    class=''    onclick='$.edit($(this).parent())' >Editar</button></td>"+ 
+                       //"<td><button  class='danger'  onclick='$.modalDelete($(this).parent())' >Eliminar</button></td>"+
+                       "</tr>";    
         });
         modulo.html(setData);
     }
+
+    $.showImage = function (btn) {
+        var url = $($(btn).parent('td')).attr('id');
+        var content = "<img src=/media/"+url+" class='shadow' style='width: 620px; height: 400px;''>"
+        $.DIALOG(content,0,250,"Imagen","icon-pictures");
+    }
+
+    $("#textSearch").keyup(function(){
+        // When value of the input is not blank
+        if( $(this).val() != "")
+        {
+            // Show only matching TR, hide rest of them
+            $("#tableProduct tbody>tr").hide();
+            $("#tableProduct td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+        }
+        else
+        {
+            // When there is no input or clean again, show everything back
+            $("#tableProduct tbody>tr").show();
+        }
+    });
+
+    $.extend($.expr[":"], 
+    {
+        "contains-ci": function(elem, i, match, array) 
+        {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
 
     var modalContent = //" <div class='container'>"+
             
@@ -129,9 +173,9 @@ $(function(){
 
         $('#textProduct').val(tr.children()[1].textContent);        
         $('#textDescription').val(tr.children()[2].textContent);
-        $('#textPrice').val(tr.children()[3].textContent);
-        $('#textPieces').val(tr.children()[4].textContent);
-        $('#cmbCategory').val(tr.children()[5].id);
+        $('#textPrice').val(tr.children()[4].textContent);
+        $('#textPieces').val(tr.children()[5].textContent);
+        $('#cmbCategory').val(tr.children()[6].id);
         
         if (tr.children()[6].textContent == "true")
         {
