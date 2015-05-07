@@ -129,14 +129,17 @@ class DeleteDataUsers(View):
 class AddEvent(View):
 	def post(self, request, *args, **kwargs):
 		try:
-			events = Eventos(
+			eventsId = Eventos.objects.all().order_by('-eve_cod').values('eve_cod')[:1]
+			#eve_url = request.POST['fileName']+eventsId
+			
+			"""events = Eventos(
 				eve_nom = request.POST['nameEvent'],
 				eve_fch = request.POST['dateEvent'],
 				eve_inf = request.POST['informationEvent'],
 				eve_url_img = request.FILES['imageEvent']
 			)
 			events.save()
-
+			"""
 			return HttpResponse(
 				json.dumps({"save":True}),
 		        content_type = "application/json; charset=utf8"
