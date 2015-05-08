@@ -1,4 +1,6 @@
 # Create your models here.
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 
@@ -71,11 +73,29 @@ class Empresa(models.Model):
 
 
 class Eventos(models.Model):
+        
+    def _generate_route_image(instance, filename):
+        
+        import os
+        from datetime import date
+
+        # Extraer la extension de la imagen del archivo original
+        extension = os.path.splitext(filename)[1][1:]
+        # Generamos la ruta relativa a  MEDIA_ROOT donde almacenar el archivo, usando la fecha actual (año/mes)
+        eventsId = Eventos.objects.all().order_by('-eve_cod').values('eve_cod')[:1][0]['eve_cod']+1
+        #route = os.path.join('evento', str(eventsId))
+        route = os.path.join('eventos', date.today().strftime("%Y/%m"))
+        # Generamos el nombre del archivo
+        fileName = '{}{}{}.{}'.format(filename.replace("."+extension,""),"_#_",eventsId, extension)
+
+        # Devolvermos la ruta completa
+        return os.path.join(route, fileName)
+
     eve_cod = models.AutoField(primary_key=True)
     eve_nom = models.CharField(max_length=100, blank=True)
-    eve_fch = models.DateField(blank=True, null=True)
+    #eve_fch = models.DateField(blank=True, null=True)
     eve_inf = models.CharField(max_length=250, blank=True)
-    eve_url_img = models.ImageField(upload_to='images', blank=True)
+    eve_url_img = models.ImageField(upload_to=_generate_route_image, blank=True)
     emp = models.ForeignKey(Empresa, blank=True, null=True)
 
     class Meta:
