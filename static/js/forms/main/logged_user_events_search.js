@@ -15,8 +15,12 @@ $(function(){
     });
     /*===========================================*/
     $.showImage = function (btn) {
-        var url = $($(btn).parent('td')).attr('id');
-        var content = "<img src=/media/"+url+" class='shadow' style='width: 620px; height: 400px;''>"
+        var pathFtp = "ftp://ftp.encodingideas.heliohost.org/evento/";
+        var pathImg = $($($(btn).parent('td')).children('span')).text();
+        var urlImg  = $.trim(pathFtp + pathImg);
+        console.log("URL=>>>>> ", urlImg);
+        //
+        var content = "<img src='"+urlImg+"' class='shadow' style='width: 620px; height: 400px;''>"
         $.DIALOG(content,0,250,"Imagen Evento","icon-pictures");
     }
 
@@ -44,6 +48,7 @@ $(function(){
                         "<td>"+$.trim(item.eve_fch)+"</td>"+
                         "<td class='text-left'>"+$.trim(item.eve_inf)+"</td>"+
                         "<td id="+item.eve_url_img+">"+
+                            '<span style="display:none;">'+item.eve_url_img+'</span>'+
                             '<button class="default" title="Ver" onclick="$.showImage(this);">'+
                                 '<i class="icon-pictures" title="Ver"></i>'+
                             '</button>'+

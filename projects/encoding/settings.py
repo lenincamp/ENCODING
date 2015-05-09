@@ -101,7 +101,7 @@ MEDIA_URL = ''
 #     file = models.FileField(upload_to='a/b/c/', storage=fs)
 
 #FTP_STORAGE_LOCATION = '[a]ftp://<user>:<pass>@<host>:<port>/[path]'
-FTP_STORAGE_LOCATION = 'ftp://encoding:encid2015@ftp.encodingideas.heliohost.org:21/evento/'
+FTP_STORAGE_LOCATION = 'ftp://encoding:encid2015@ftp.encodingideas.heliohost.org:21/public_ftp/'
 
 
 #MEDIA_URL = 'ftp://encoding:encid2015@ftp.encodingideas.heliohost.org/evento/'

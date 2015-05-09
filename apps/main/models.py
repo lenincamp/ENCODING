@@ -77,8 +77,7 @@ class Eventos(models.Model):
     def _generate_route_image(instance, filename):
         
         import os
-        from datetime import date
-
+        #from datetime import date
         # Extraer la extension de la imagen del archivo original
         extension = os.path.splitext(filename)[1][1:]
         # Generamos la ruta relativa a  MEDIA_ROOT donde almacenar el archivo, usando la fecha actual (año/mes)
@@ -86,13 +85,13 @@ class Eventos(models.Model):
         eventId = event['eve_cod']+1
         empId = event['emp_id']
         
-        #route = os.path.join('evento', str(empId))
+        route = os.path.join('evento', str(empId))
         #route = os.path.join('eventos', date.today().strftime("%Y/%m"))
         # Generamos el nombre del archivo
         fileName = '{}{}{}.{}'.format(filename.replace("."+extension,""),"_#_",eventId, extension)
 
         # Devolvermos la ruta completa
-        return os.path.join(str(empId), fileName)
+        return os.path.join(route, fileName)
 
     eve_cod = models.AutoField(primary_key=True)
     eve_nom = models.CharField(max_length=100, blank=True)
