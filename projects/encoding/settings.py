@@ -89,6 +89,19 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     BASE_DIR.child('static'),
 )
-#ftp://user:pass@url_ftp/
-MEDIA_ROOT = 'ftp://encoding:encid2015@ftp.encodingideas.heliohost.org/' #BASE_DIR.child('media')
-MEDIA_URL = '/media/'
+
+MEDIA_ROOT = '' #BASE_DIR.child('media')
+MEDIA_URL = ''
+
+#==>>> server ftp images <<<==#
+#In models.py you can write:
+# from FTPStorage import FTPStorage
+# fs = FTPStorage()
+# class FTPTest(models.Model):
+#     file = models.FileField(upload_to='a/b/c/', storage=fs)
+
+#FTP_STORAGE_LOCATION = '[a]ftp://<user>:<pass>@<host>:<port>/[path]'
+FTP_STORAGE_LOCATION = 'ftp://encoding:encid2015@ftp.encodingideas.heliohost.org:21/evento/'
+
+
+#MEDIA_URL = 'ftp://encoding:encid2015@ftp.encodingideas.heliohost.org/evento/'

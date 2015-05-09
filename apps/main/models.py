@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-
+from .FTPStorage import FTPStorage
 
 class Asistencia(models.Model):
     ast_cod = models.AutoField(primary_key=True)
@@ -71,7 +71,7 @@ class Empresa(models.Model):
         managed = False
         db_table = 'empresa'
 
-
+fs = FTPStorage()
 class Eventos(models.Model):
         
     def _generate_route_image(instance, filename):
@@ -85,19 +85,20 @@ class Eventos(models.Model):
         event = Eventos.objects.all().order_by('-eve_cod').values('eve_cod','emp_id')[:1][0]
         eventId = event['eve_cod']+1
         empId = event['emp_id']
-        route = os.path.join('evento', str(empId))
+        
+        #route = os.path.join('evento', str(empId))
         #route = os.path.join('eventos', date.today().strftime("%Y/%m"))
         # Generamos el nombre del archivo
         fileName = '{}{}{}.{}'.format(filename.replace("."+extension,""),"_#_",eventId, extension)
 
         # Devolvermos la ruta completa
-        return os.path.join(route, fileName)
+        return os.path.join(str(empId), fileName)
 
     eve_cod = models.AutoField(primary_key=True)
     eve_nom = models.CharField(max_length=100, blank=True)
     #eve_fch = models.DateField(blank=True, null=True)
     eve_inf = models.CharField(max_length=250, blank=True)
-    eve_url_img = models.ImageField(upload_to=_generate_route_image, blank=True)
+    eve_url_img = models.ImageField(upload_to=_generate_route_image, blank=True, storage=fs)
     emp = models.ForeignKey(Empresa, blank=True, null=True)
 
     class Meta:

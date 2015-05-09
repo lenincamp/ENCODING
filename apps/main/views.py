@@ -129,11 +129,6 @@ class DeleteDataUsers(View):
 class AddEvent(View):
 	def post(self, request, *args, **kwargs):
 		try:
-			eventsId = Eventos.objects.all().order_by('-eve_cod').values('eve_cod')[:1][0]['eve_cod']+1
-			#==> ruta_imagen : evento(configurado en models upload_to)/idEmpresa/fileName_#_idEmpresa.fileType
-			eventUrl = str(eventsId)+"/"+request.GET['fileName']+"_#_"+str(eventsId)+request.GET['fileType']
-			
-			
 			events = Eventos(
 				eve_nom = request.POST['nameEvent'],				
 				eve_inf = request.POST['informationEvent'],
@@ -141,15 +136,12 @@ class AddEvent(View):
 				emp_id = 1
 			)
 			events.save()
-			"""
+			
 			return HttpResponse(
 				json.dumps({"save":True}),
 		        content_type = "application/json; charset=utf8"
-		    )"""
-			return HttpResponse(
-				json.dumps({"id_event":eventsId, "eve_url":eventUrl}),
-		        content_type = "application/json; charset=utf8"
 		    )
+		    
 		except Exception, e:
 			print e
 class LoadEvents(View):

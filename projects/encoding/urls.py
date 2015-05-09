@@ -10,4 +10,4 @@ urlpatterns = patterns('',
 
     url(r'^main/', include('apps.main.urls'), name='apps_main_urls'),
 )
-urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
