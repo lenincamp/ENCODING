@@ -135,8 +135,7 @@ class AddEvent(View):
 			
 			
 			events = Eventos(
-				eve_nom = request.POST['nameEvent'],
-				
+				eve_nom = request.POST['nameEvent'],				
 				eve_inf = request.POST['informationEvent'],
 				eve_url_img = request.FILES['imageEvent'],
 				emp_id = 1

@@ -82,11 +82,13 @@ class Eventos(models.Model):
         # Extraer la extension de la imagen del archivo original
         extension = os.path.splitext(filename)[1][1:]
         # Generamos la ruta relativa a  MEDIA_ROOT donde almacenar el archivo, usando la fecha actual (año/mes)
-        eventsId = Eventos.objects.all().order_by('-eve_cod').values('eve_cod')[:1][0]['eve_cod']+1
-        #route = os.path.join('evento', str(eventsId))
-        route = os.path.join('eventos', date.today().strftime("%Y/%m"))
+        event = Eventos.objects.all().order_by('-eve_cod').values('eve_cod','emp_id')[:1][0]
+        eventId = event['eve_cod']+1
+        empId = event['emp_id']
+        route = os.path.join('evento', str(empId))
+        #route = os.path.join('eventos', date.today().strftime("%Y/%m"))
         # Generamos el nombre del archivo
-        fileName = '{}{}{}.{}'.format(filename.replace("."+extension,""),"_#_",eventsId, extension)
+        fileName = '{}{}{}.{}'.format(filename.replace("."+extension,""),"_#_",eventId, extension)
 
         # Devolvermos la ruta completa
         return os.path.join(route, fileName)

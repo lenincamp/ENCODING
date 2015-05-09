@@ -89,6 +89,6 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     BASE_DIR.child('static'),
 )
-
-MEDIA_ROOT = BASE_DIR.child('media')
+#ftp://user:pass@url_ftp/
+MEDIA_ROOT = 'ftp://encoding:encid2015@ftp.encodingideas.heliohost.org/' #BASE_DIR.child('media')
 MEDIA_URL = '/media/'
