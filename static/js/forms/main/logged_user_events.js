@@ -111,4 +111,9 @@ $(function () {
     	}
   	}
 
+    /*=======*/
+    $("#btnEvents").click(function(event) {
+        return false;
+    });
+
 });

@@ -1,5 +1,3 @@
-from django.db import models
-
 # Create your models here.
 from django.db import models
 
@@ -21,6 +19,7 @@ class Categoria(models.Model):
     cat_des = models.CharField(max_length=250, blank=True)
     cat_est = models.NullBooleanField()
     cat_url = models.ImageField(upload_to='images',max_length=250, blank=True)
+    emp_id = models.ForeignKey('Empresa', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -42,6 +41,8 @@ class Cliente(models.Model):
     cli_tel = models.CharField(primary_key=True, max_length=10)
     cli_dir = models.CharField(max_length=100, blank=True)
     cli_eml = models.CharField(max_length=50, blank=True)
+    emp = models.ForeignKey('Empresa', blank=True, null=True)
+    cli_id = models.IntegerField(primary_key=True)
 
     class Meta:
         managed = False
@@ -52,10 +53,21 @@ class DetalleSucursalEvento(models.Model):
     id = models.AutoField(primary_key=True)
     eve_cod = models.ForeignKey('Eventos', db_column='eve_cod')
     suc_cod = models.ForeignKey('Sucursal', db_column='suc_cod')
+    eve_fch = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'detalle_sucursal_evento'
+
+class Empresa(models.Model):
+    emp_id = models.AutoField(primary_key=True)
+    emp_nom = models.CharField(max_length=250, blank=True)
+    emp_fec_exp_lic = models.DateField(blank=True, null=True)
+    emp_ver = models.CharField(max_length=6, blank=True)
+
+    class Meta:
+        managed = False
+        db_table = 'empresa'
 
 
 class Eventos(models.Model):
@@ -64,6 +76,7 @@ class Eventos(models.Model):
     eve_fch = models.DateField(blank=True, null=True)
     eve_inf = models.CharField(max_length=250, blank=True)
     eve_url_img = models.ImageField(upload_to='images', blank=True)
+    emp = models.ForeignKey(Empresa, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -81,6 +94,21 @@ class FormaPago(models.Model):
         managed = False
         db_table = 'forma_pago'
 
+class Horario(models.Model):
+    hor_cod = models.AutoField(primary_key=True)
+    hor_lun = models.CharField(max_length=255, blank=True)
+    hor_mar = models.CharField(max_length=255, blank=True)
+    hor_mie = models.CharField(max_length=255, blank=True)
+    hor_jue = models.CharField(max_length=255, blank=True)
+    hor_vie = models.CharField(max_length=255, blank=True)
+    hor_sab = models.CharField(max_length=255, blank=True)
+    hor_dom = models.CharField(max_length=255, blank=True)
+    suc_cod = models.ForeignKey('Sucursal', db_column='suc_cod', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'horario'
+
 
 class Mensaje(models.Model):
     men_cod = models.AutoField(primary_key=True)
@@ -90,7 +118,7 @@ class Mensaje(models.Model):
     men_est = models.NullBooleanField()
     tme_cod = models.ForeignKey('TipoMensaje', db_column='tme_cod')
     usu_cod = models.ForeignKey('Usuario', db_column='usu_cod')
-    cli_tel = models.ForeignKey(Cliente, db_column='cli_tel', blank=True, null=True)
+    cli = models.ForeignKey(Cliente, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -140,6 +168,9 @@ class Sucursal(models.Model):
     suc_dir = models.CharField(max_length=100, blank=True)
     suc_tel = models.CharField(max_length=10, blank=True)
     ciu_cod = models.ForeignKey(Ciudad, db_column='ciu_cod')
+    suc_lat = models.FloatField(blank=True, null=True)
+    suc_lng = models.FloatField(blank=True, null=True)
+    emp = models.ForeignKey(Empresa, blank=True, null=True)
 
     class Meta:
         managed = False
