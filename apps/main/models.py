@@ -88,7 +88,8 @@ class Eventos(models.Model):
         route = os.path.join('evento', str(empId))
         #route = os.path.join('eventos', date.today().strftime("%Y/%m"))
         # Generamos el nombre del archivo
-        fileName = '{}{}{}.{}'.format(filename.replace("."+extension,""),"_#_",eventId, extension)
+        #fileName = '{}{}{}.{}'.format(filename.replace("."+extension,""),"_#_",eventId, extension)
+        fileName = '{}{}.{}'.format("evento_",eventId, extension)
 
         # Devolvermos la ruta completa
         return os.path.join(route, fileName)

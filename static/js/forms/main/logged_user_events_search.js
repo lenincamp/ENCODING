@@ -15,12 +15,12 @@ $(function(){
     });
     /*===========================================*/
     $.showImage = function (btn) {
-        var pathFtp = "ftp://ftp.encodingideas.heliohost.org/evento/";
+        var pathFtp = "http://encodingideas.heliohost.org/";
         var pathImg = $($($(btn).parent('td')).children('span')).text();
         var urlImg  = $.trim(pathFtp + pathImg);
         console.log("URL=>>>>> ", urlImg);
         //
-        var content = "<img src='"+urlImg+"' class='shadow' style='width: 620px; height: 400px;''>"
+        var content = "<img src='"+urlImg.replace('#','%23')+"' class='shadow' style='width: 620px; height: 400px;'>"
         $.DIALOG(content,0,250,"Imagen Evento","icon-pictures");
     }
 
