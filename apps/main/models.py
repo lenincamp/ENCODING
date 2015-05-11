@@ -31,6 +31,7 @@ class Categoria(models.Model):
 class Ciudad(models.Model):
     ciu_cod = models.AutoField(primary_key=True)
     ciu_nom = models.CharField(max_length=100, blank=True)
+    emp_id  = models.ForeignKey('Empresa', db_column='emp_id',blank=True, null=True)
 
     class Meta:
         managed = False
@@ -140,7 +141,6 @@ class Mensaje(models.Model):
     men_fch = models.DateField(blank=True, null=True)
     men_est = models.NullBooleanField()
     tme_cod = models.ForeignKey('TipoMensaje', db_column='tme_cod')
-    usu_cod = models.ForeignKey('Usuario', db_column='usu_cod')
     cli = models.ForeignKey(Cliente, blank=True, null=True)
 
     class Meta:
@@ -193,7 +193,7 @@ class Sucursal(models.Model):
     ciu_cod = models.ForeignKey(Ciudad, db_column='ciu_cod')
     suc_lat = models.FloatField(blank=True, null=True)
     suc_lng = models.FloatField(blank=True, null=True)
-    emp = models.ForeignKey(Empresa, blank=True, null=True)
+    usu_cod = models.ForeignKey('Usuario', db_column='usu_cod', blank=True, null=True)
 
     class Meta:
         managed = False
