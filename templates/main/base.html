@@ -8,6 +8,7 @@
     @import url("{{STATIC_URL}}css/metro-ui/main.css");
     body{
       min-height: 200px;
+      scroll:auto;
     }
     {% block style %}
     	
@@ -28,7 +29,7 @@
 
   <!--HEADER MAIN NAVBAR-->
   <header>
-    <div class="navbar shadow">
+    <div class="navbar fixed-top shadow">
       <div class="navbar-content container">        
         <a href="/main/logged_user/" class="element">
           <span class="icon-grid-view "></span> ENCODING <sup>Ideas</sup>
@@ -116,7 +117,10 @@
     </div>
   </header>
   <!--END NAVBAR-->
-  
+  <br>
+  <br>
+  <br>
+  <br>
 	{% block content %}
 		
 	{% endblock content %}

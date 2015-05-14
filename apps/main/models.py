@@ -56,8 +56,8 @@ class DetalleSucursalEvento(models.Model):
     id = models.AutoField(primary_key=True)
     eve_cod = models.ForeignKey('Eventos', db_column='eve_cod')
     suc_cod = models.ForeignKey('Sucursal', db_column='suc_cod')
-    eve_fch = models.DateField(blank=True, null=True)
-
+    eve_fch_ini = models.DateField(blank=True, null=True)
+    eve_fch_fin = models.DateField(blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'detalle_sucursal_evento'

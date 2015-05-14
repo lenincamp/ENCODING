@@ -14,8 +14,14 @@
             <label>Nombre Evento:</label>
             <input type="text" id="txtNameEvent" name="nameEvent" data-transform="input-control" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, minimo 8 digitos!" data-popover-background="bg-red" data-popover-color="fg-white"/>
             
-            <label>Fecha:</label>
-            <div class="input-control text size3" id="txtDateEvent" name="txtDateEvent" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, formato: Año-Mes-Día !" data-popover-background="bg-red" data-popover-color="fg-white">
+            <label>Fecha Inicio:</label>
+            <div class="input-control text size3" id="txtDateEventStart" name="txtDateEvent" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, formato: Año-Mes-Día !" data-popover-background="bg-red" data-popover-color="fg-white">
+                <input type="text" id="dateEvent" name="dateEvent">
+                <button class="btn-date"></button>
+            </div>
+
+            <label>Fecha Fin:</label>
+            <div class="input-control text size3" id="txtDateEventEnd" name="txtDateEvent" data-popover="popover" data-popover-position="right" data-popover-text="¡Campo requerido, formato: Año-Mes-Día !" data-popover-background="bg-red" data-popover-color="fg-white">
                 <input type="text" id="dateEvent" name="dateEvent">
                 <button class="btn-date"></button>
             </div>

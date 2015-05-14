@@ -1,12 +1,21 @@
 $(function () {
 	
-	$("#txtDateEvent").datepicker({
+	$("#txtDateEventStart").datepicker({
         
         format: "yyyy-mm-dd", // set output format
         effect: "slide", // none, slide, fade
         position: "bottom", // top or bottom,
         locale: 'es', // 'ru' or 'en', default is $.Metro.currentLocale
     });
+
+    $("#txtDateEventEnd").datepicker({
+        
+        format: "yyyy-mm-dd", // set output format
+        effect: "slide", // none, slide, fade
+        position: "bottom", // top or bottom,
+        locale: 'es', // 'ru' or 'en', default is $.Metro.currentLocale
+    });
+
 
     /*===VALIDACIONES===*/
     $('#frmImg').validate({
