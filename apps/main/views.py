@@ -46,13 +46,16 @@ class Login(View):
 
 	def post(self, request, *args, **kwargs):
 		try:	
-			user   = Usuario.objects.get(usu_ced=request.POST['user'], usu_pass=request.POST['password'])
-			emp_id = Sucursal.objects.filter(usu_cod=user).select_related('ciu_cod').values('ciu_cod__emp_id')[0]['ciu_cod__emp_id']
+			user    = Usuario.objects.get(usu_ced=request.POST['user'], usu_pass=request.POST['password'])
+			dat_emp = Sucursal.objects.filter(usu_cod=1).select_related('ciu_cod').values('ciu_cod__emp_id','suc_cod')[0]
+			emp_cod = dat_emp['ciu_cod__emp_id']
+			suc_cod = dat_emp['suc_cod']
 
 			request.session['user']={
 				"id"      : user.usu_cod,
 				"tip_cod" : user.tip_cod_id,
-				"emp_id"  : emp_id
+				"emp_id"  : emp_id,
+				"suc_cod" : suc_cod
 			}
 			#cicle_key()-->Crea una nueva clave de sesión al tiempo que conserva los datos 
 			# de la sesión actual. django.contrib.auth.login () llama a este método para 
